@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 const brands = [
@@ -15,48 +16,36 @@ const brands = [
     { id: 8, name: "Zara", logo: "/dummy-logo4.png" },
 ];
 
-const serviceProviders = [
+const serviceCategoriesMarquee = [
     {
-        id: 1,
-        name: "Harry Thomas Wilson",
-        category: "Development",
-        rating: 4.4,
-        avatar: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1"
+        name: "Web Development",
+        href: "/services?category=Development",
+        image: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=300&h=180&dpr=1"
     },
     {
-        id: 2,
-        name: "Olivia Grace Smith",
-        category: "Designer",
-        rating: 4.6,
-        avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1"
+        name: "Graphic Design",
+        href: "/services?category=Designer",
+        image: "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=300&h=180&dpr=1"
     },
     {
-        id: 3,
-        name: "Isla Charlotte Brown",
-        category: "Copy writing",
-        rating: 4.5,
-        avatar: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1"
+        name: "Digital Marketing",
+        href: "/services?category=Marketing",
+        image: "https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=300&h=180&dpr=1"
     },
     {
-        id: 4,
-        name: "James William Davies",
-        category: "Marketing",
-        rating: 4.8,
-        avatar: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1"
+        name: "UI/UX Design",
+        href: "/services?category=UIUX Design",
+        image: "https://images.pexels.com/photos/1966445/pexels-photo-1966445.jpeg?auto=compress&cs=tinysrgb&w=300&h=180&dpr=1"
     },
     {
-        id: 5,
-        name: "Sophie Marie Evans",
-        category: "Designer",
-        rating: 4.9,
-        avatar: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1"
+        name: "Copy writing",
+        href: "/services?category=Copy writing",
+        image: "https://images.pexels.com/photos/6238297/pexels-photo-6238297.jpeg?auto=compress&cs=tinysrgb&w=300&h=180&dpr=1"
     },
     {
-        id: 6,
-        name: "Leo Alexander Taylor",
-        category: "Development",
-        rating: 4.7,
-        avatar: "https://images.pexels.com/photos/912278/pexels-photo-912278.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1"
+        name: "SEO & Marketing",
+        href: "/services?category=SEO Marketing",
+        image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=300&h=180&dpr=1"
     }
 ];
 
@@ -131,33 +120,33 @@ const AllBrands = () => {
                             ))}
                         </div>
                     ) : (
-                        /* Service Providers Marquee */
+                        /* Service Categories Marquee */
                         <div className="flex space-x-8 animate-marquee whitespace-nowrap items-center">
-                            {[...serviceProviders, ...serviceProviders, ...serviceProviders].map((provider, index) => (
-                                <div
-                                    key={`${provider.id}-${index}`}
-                                    className="inline-flex items-center gap-4 bg-[#2a2a2a]/30 border border-zinc-800/60 rounded-xl px-5 py-3.5 min-w-[280px] hover:border-[#FF6700]/30 hover:bg-[#2a2a2a]/55 transition-all duration-300 cursor-pointer"
+                            {[...serviceCategoriesMarquee, ...serviceCategoriesMarquee, ...serviceCategoriesMarquee].map((cat, index) => (
+                                <Link
+                                    key={`${cat.name}-${index}`}
+                                    href={cat.href}
+                                    className="inline-flex flex-col relative w-60 h-36 rounded-2xl overflow-hidden border border-zinc-800/80 shadow-lg group hover:border-[#FF6700]/30 transition-all duration-300 cursor-pointer select-none"
                                 >
-                                    <div className="w-12 h-12 rounded-full overflow-hidden border border-zinc-700/80 shrink-0 relative">
-                                        <img
-                                            src={provider.avatar}
-                                            alt={provider.name}
-                                            className="w-full h-full object-cover"
-                                        />
+                                    {/* Image Background */}
+                                    <img
+                                        src={cat.image}
+                                        alt={cat.name}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                    {/* Dark Gradient Overlay */}
+                                    <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/40 to-black/10 transition-opacity duration-300 group-hover:from-black/90" />
+                                    
+                                    {/* Content inside card */}
+                                    <div className="absolute bottom-4 left-4 text-left">
+                                        <h4 className="text-white font-bold text-base tracking-wide group-hover:text-[#FFDDA5] transition-colors">
+                                            {cat.name}
+                                        </h4>
+                                        <span className="text-[10px] text-zinc-400 font-medium uppercase tracking-wider mt-1 block">
+                                            Explore Services
+                                        </span>
                                     </div>
-                                    <div className="flex flex-col text-left">
-                                        <span className="text-white font-semibold text-sm line-clamp-1">{provider.name}</span>
-                                        <div className="flex items-center gap-2 mt-1">
-                                            <span className="text-[11px] bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-medium">
-                                                {provider.category}
-                                            </span>
-                                            <div className="flex items-center gap-0.5 text-amber-400">
-                                                <span className="text-xs font-semibold">★</span>
-                                                <span className="text-[11px] text-zinc-300 font-medium">{provider.rating}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     )}
