@@ -12,13 +12,7 @@ type NavLink = {
 
 const navLinks: NavLink[] = [
     { name: 'Home', href: '/' },
-    { name: 'Shop', href: '/shop' },
-    { name: 'Services', href: '/services' },
-    { name: 'Contact Us', href: '/contact-us' },
-];
-
-const serviceNavItems: NavLink[] = [
-    { name: 'Home', href: '/' },
+    { name: 'Products', href: '/shop' },
     { name: 'Services', href: '/services' },
     { name: 'Contact Us', href: '/contact-us' },
 ];
