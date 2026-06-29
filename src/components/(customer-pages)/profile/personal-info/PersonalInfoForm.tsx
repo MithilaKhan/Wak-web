@@ -67,7 +67,7 @@ export default function PersonalInfoForm({
             name="username"
             defaultValue={userData.username}
             placeholder="Enter full name"
-            className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10"
+            className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10"
           />
         </div>
 
@@ -85,7 +85,7 @@ export default function PersonalInfoForm({
             type="email"
             defaultValue={userData.email}
             placeholder="Enter email address"
-            className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10"
+            className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10"
           />
         </div>
 
@@ -102,7 +102,7 @@ export default function PersonalInfoForm({
             name="phone"
             defaultValue={userData.phone}
             placeholder="+9 018674512001"
-            className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10"
+            className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10"
           />
         </div>
 
@@ -112,7 +112,7 @@ export default function PersonalInfoForm({
             Choose country
           </label>
           <Select name="country" defaultValue={userData.country || undefined}>
-            <SelectTrigger className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10">
+            <SelectTrigger className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10">
               <SelectValue placeholder="Select country name" />
             </SelectTrigger>
             <SelectContent className="bg-[#2a2a2a] border-zinc-700 text-white">

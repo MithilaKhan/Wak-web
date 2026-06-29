@@ -16,7 +16,7 @@ export default async function ProfileSidebar() {
     <aside className="bg-[#353535]  flex flex-col h-fit lg:sticky lg:top-6">
       {/* Profile Header */}
       <div className="flex flex-col items-center gap-2 pt-8 pb-6 px-6">
-        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-[#1E1E1E]">
+        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-[#4f2c1d]">
           <img
             src="https://i.pravatar.cc/150?img=68"
             alt="Profile"

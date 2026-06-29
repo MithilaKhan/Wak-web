@@ -19,17 +19,12 @@ interface NavbarProps {
     userMode?: string;
 }
 
-
-
-
 export default function Navbar({ userMode = 'customer' }: NavbarProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { isLoggedIn, logout } = useAuth();
-    const pathname = usePathname();
-
 
     return (
-        <div className="text-white z-50 w-full bg-[#1e1e1e]">
+        <div className="text-white z-50 w-full bg-[#4f2c1d]">
             {/* Line 1: Top Bar */}
             <div className="container mx-auto px-6 h-16 flex items-center justify-between gap-8">
                 <Logo />
@@ -52,7 +47,7 @@ export default function Navbar({ userMode = 'customer' }: NavbarProps) {
             </div>
 
             {/* Line 2: Navigation Bar */}
-            <div className="hidden xl:block border-t border-zinc-800/50">
+            <div className="hidden xl:block ">
                 <div className="container mx-auto px-6 h-16 flex items-center justify-between gap-8">
                     <BrowseCategoriesButton />
 

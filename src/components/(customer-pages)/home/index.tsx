@@ -10,8 +10,6 @@ import Services from "./components/Services";
 const Home = () => {
     return (
         <main className="w-full">
-            {/* Tiny client-side effect wrapper. Kept as a leaf to allow
-                the entire homepage tree to render as Server Components! */}
             <UserModeReset />
 
             <Banner />
@@ -21,7 +19,6 @@ const Home = () => {
             <NewArrival />
             <Services />
             <Features />
-            {/* Other home sections will go here */}
         </main>
     );
 };

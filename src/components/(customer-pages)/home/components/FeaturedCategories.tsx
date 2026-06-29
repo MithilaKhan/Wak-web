@@ -30,7 +30,7 @@ const categories = [
 
 const FeaturedCategories = () => {
     return (
-        <section className="py-[50px] bg-[#1e1e1e]">
+        <section className="py-[50px] bg-[#4f2c1d]">
             <div className="container mx-auto px-4">
                 {/* Header with Navigation */}
                 <div className="flex justify-between items-center mb-10">
@@ -75,7 +75,7 @@ const FeaturedCategories = () => {
                         {categories.map((category) => (
                             <SwiperSlide key={category.id} className="group cursor-pointer flex justify-center items-center">
                                 {/* Fluid 200x143 card wrapper */}
-                                <div className="w-full max-w-[200px] h-[143px] bg-[#2a2a2a]/25 border border-zinc-800/40 rounded-xl flex flex-col items-center justify-center ">
+                                <div className="w-full max-w-[200px] h-[143px] bg-white/5 border border-white/20 rounded-xl flex flex-col items-center justify-center ">
                                     <div className="relative min-w-[144px] min-h-20 flex items-center justify-center mb-2">
                                         <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-500">
                                             <Image

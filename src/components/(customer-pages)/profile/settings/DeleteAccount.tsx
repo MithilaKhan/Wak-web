@@ -50,8 +50,8 @@ export default function DeleteAccount() {
               >
                 <div
                   className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${isSelected
-                    ? "bg-[#1E1E1E] border-zinc-500 text-white"
-                    : "bg-[#1E1E1E] border-zinc-700 text-transparent group-hover:border-zinc-500"
+                    ? "bg-[#4f2c1d] border-zinc-500 text-white"
+                    : "bg-[#4f2c1d] border-zinc-700 text-transparent group-hover:border-zinc-500"
                     }`}
                 >
                   <Check className={`w-3.5 h-3.5 ${isSelected ? "text-white" : "opacity-0"}`} />
@@ -77,7 +77,7 @@ export default function DeleteAccount() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="********"
-            className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10 pr-12"
+            className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10 pr-12"
           />
           <button
             type="button"

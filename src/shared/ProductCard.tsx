@@ -40,16 +40,16 @@ const ProductCard = ({ product, bgColor }: { product: ProductCardProps, bgColor?
         <div
             onClick={handleClick}
             className={`p-4 rounded-xl group relative transition-all duration-300 cursor-pointer`}
-            style={{ backgroundColor: bgColor || "#353535" }}
+            style={{ backgroundColor: bgColor || "#fff" }}
         >
             {/* Top Row: Discount and Cart */}
             <div className="flex justify-between items-center mb-4">
                 {discount ? (
-                    <span className="bg-[#FFDDA5] text-[#1e1e1e] text-xs font-normal px-2 py-1 rounded-xs">
+                    <span className="bg-[#FFDDA5] text-[#4f2c1d] text-xs font-bold px-2 py-1 rounded-xs">
                         -{discount}%
                     </span>
                 ) : <div />}
-                <button onClick={(e) => handleCartClick(e)} className="w-8 h-8 rounded-full  flex items-center justify-center text-white hover:bg-primary transition-colors cursor-pointer" style={{ backgroundColor: bgColor ? "#353535" : "#1e1e1e" }}>
+                <button onClick={(e) => handleCartClick(e)} className="w-8 h-8 rounded-full  flex items-center justify-center text-white hover:bg-primary transition-colors cursor-pointer" style={{ backgroundColor: bgColor ? "#353535" : "#4f2c1d" }}>
                     <ShoppingCart className="w-4 h-4" />
                 </button>
             </div>
@@ -68,12 +68,12 @@ const ProductCard = ({ product, bgColor }: { product: ProductCardProps, bgColor?
 
             {/* Product Info */}
             <div className="space-y-2">
-                <h3 className="text-white font-medium text-base truncate">{name}</h3>
+                <h3 className="text-zinc-900 font-medium text-base truncate">{name}</h3>
 
                 <div className="flex items-center gap-3">
                     <span className="text-primary font-semibold">${currentPrice}</span>
                     {originalPrice && (
-                        <span className="text-zinc-500 line-through text-sm">${originalPrice}</span>
+                        <span className="text-zinc-600 line-through text-sm">${originalPrice}</span>
                     )}
                 </div>
 
@@ -87,7 +87,7 @@ const ProductCard = ({ product, bgColor }: { product: ProductCardProps, bgColor?
                             />
                         ))}
                     </div>
-                    <span className="text-zinc-500 text-xs ml-1">({reviews})</span>
+                    <span className="text-zinc-600 text-xs ml-1">({reviews})</span>
                 </div>
             </div>
         </div>

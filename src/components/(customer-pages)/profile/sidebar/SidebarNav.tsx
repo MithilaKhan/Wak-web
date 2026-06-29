@@ -51,7 +51,7 @@ export default function SidebarNav({ items }: SidebarNavProps) {
                 text-sm font-normal transition-all duration-200
                 ${isActive
                   ? "bg-primary text-white shadow-lg shadow-primary/20"
-                  : "text-white/72 bg-[#1E1E1E] cursor-pointer"
+                  : "text-white/72 bg-[#4f2c1d] cursor-pointer"
                 }`}>
               <Icon className="w-[18px] h-[18px] shrink-0" />
               <span>{item.label}</span>

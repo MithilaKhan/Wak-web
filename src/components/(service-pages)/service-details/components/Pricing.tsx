@@ -77,7 +77,7 @@ export default function Pricing() {
                 <div className="mb-4">
                     <div className="flex items-center justify-between mb-4">
                         <span className="text-4xl font-medium text-white">${currentOption.price}</span>
-                        <span className="flex items-center gap-2 text-sm text-white/72 bg-[#1E1E1E] px-3 py-2 rounded-full">
+                        <span className="flex items-center gap-2 text-sm text-white/72 bg-[#4f2c1d] px-3 py-2 rounded-full">
                             <Clock className="w-4 h-4 text-orange-400" />
                             <span>{currentOption.delivery}</span>
                         </span>

@@ -28,7 +28,7 @@ interface LanguageSelectorProps {
 }
 
 export default function LanguageSelector({
-    className = "flex items-center gap-3 bg-[#2a2a2a] px-4 py-2 rounded-lg cursor-pointer hover:bg-zinc-800 transition-colors border border-zinc-800 shrink-0",
+    className = "flex items-center gap-3 bg-primary px-4 py-2 rounded-lg cursor-pointer hover:bg-primary/90 transition-colors border border-primary shrink-0",
     iconClassName,
 }: LanguageSelectorProps) {
     return (
@@ -36,9 +36,9 @@ export default function LanguageSelector({
             <SelectTrigger className={`border-none h-auto w-auto focus:ring-0 focus:ring-offset-0 ${className}`}>
                 <SelectValue placeholder="Select Country" />
             </SelectTrigger>
-            <SelectContent className="bg-[#2a2a2a] border-zinc-700 text-white z-[100] max-h-60">
+            <SelectContent className="bg-primary border-white text-white z-100 max-h-60">
                 {countries.map((country) => (
-                    <SelectItem key={country} value={country} className="focus:bg-zinc-700 focus:text-white cursor-pointer">
+                    <SelectItem key={country} value={country} className="focus:bg-white focus:text-black cursor-pointer">
                         {country}
                     </SelectItem>
                 ))}

@@ -77,7 +77,7 @@ const NewArrival = () => {
         router.refresh();
     };
     return (
-        <section className="py-[50px] bg-[#1e1e1e]">
+        <section className="py-[50px] bg-[#4f2c1d]">
             <div className="container mx-auto px-4">
                 {/* Header */}
                 <div className="mb-12">

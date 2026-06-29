@@ -32,7 +32,7 @@ const bannerData = [
 
 const Banner = () => {
     return (
-        <div className="w-full relative group bg-[#1e1e1e]  flex flex-col items-center">
+        <div className="w-full relative group bg-[#4f2c1d]  flex flex-col items-center">
             <Swiper
                 modules={[Autoplay, Pagination]}
                 pagination={{

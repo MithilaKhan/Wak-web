@@ -244,7 +244,7 @@ export default function ServicesList() {
         : servicesData.filter(service => service.category === selectedCategory);
 
     return (
-        <section className="pb-16 md:py-20 bg-[#1e1e1e]">
+        <section className="pb-16 md:py-20 bg-[#4f2c1d]">
             <div className="container mx-auto px-4">
                 {/* Section Header */}
                 <div className="mb-8">

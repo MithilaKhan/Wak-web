@@ -32,7 +32,7 @@ const ServiceCard = ({ id, name, coverImage, category, price, rating, reviewCoun
     return (
         <div
             onClick={handleClick}
-            className="group relative h-full overflow-hidden rounded-2xl bg-linear-to-br from-white/10 to-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+            className="group relative h-full overflow-hidden rounded-2xl bg-linear-to-br from-white/80 to-white/80 backdrop-blur-2xl border border-white/10 shadow-2xl transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
         >
             {/* Cover Image */}
             <div className="relative w-full h-48 overflow-hidden">
@@ -45,7 +45,7 @@ const ServiceCard = ({ id, name, coverImage, category, price, rating, reviewCoun
                 <div className="absolute inset-0 bg-linear-to-b from-black/20 to-black/40" />
 
                 {/* Category Badge */}
-                <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/15 backdrop-blur-lg border border-white/20 text-xs font-semibold text-white shadow-lg">
+                <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/5 backdrop-blur-lg border border-primary/20 text-xs font-semibold text-primary shadow-lg">
                     {category}
                 </div>
             </div>
@@ -58,17 +58,17 @@ const ServiceCard = ({ id, name, coverImage, category, price, rating, reviewCoun
                         <img
                             src={avatar}
                             alt={name}
-                            className="w-9 h-9 rounded-full object-cover border-2 border-white/20 shrink-0"
+                            className="w-9 h-9 rounded-full object-cover border-2 border-white/2 shrink-0"
                         />
-                        <span className="text-sm font-semibold text-white truncate">
+                        <span className="text-sm font-semibold text-gray-800 truncate">
                             {name}
                         </span>
                     </div>
                     <div className="flex items-center gap-1 shrink-0">
                         <Star size={14} className="fill-amber-400 text-amber-400" />
-                        <span className="text-xs font-semibold text-white">
+                        <span className="text-xs font-semibold text-gray-700">
                             {rating.toFixed(1)}{" "}
-                            <span className="text-white/60 font-normal">
+                            <span className="text-gray-500 font-normal">
                                 ({reviewCount})
                             </span>
                         </span>
@@ -76,12 +76,12 @@ const ServiceCard = ({ id, name, coverImage, category, price, rating, reviewCoun
                 </div>
 
                 {/* Description */}
-                <p className="text-sm text-white/75 line-clamp-2 leading-relaxed">
+                <p className="text-sm text-gray-700 line-clamp-2 leading-relaxed">
                     {description}
                 </p>
 
                 {/* Price */}
-                <p className="text-sm font-bold text-amber-400 tracking-wide">
+                <p className="text-sm font-bold text-primary tracking-wide">
                     From: ${price}
                 </p>
             </div>

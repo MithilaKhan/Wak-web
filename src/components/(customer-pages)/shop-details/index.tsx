@@ -7,7 +7,7 @@ export default function ShopDetails() {
     const p = productDetail;
 
     return (
-        <div className="min-h-[calc(100vh-180px)] bg-[#1e1e1e] py-[50px]">
+        <div className="min-h-[calc(100vh-180px)] bg-[#4f2c1d] py-[50px]">
             <div className="container mx-auto px-4">
                 <p className=" text-2xl font-medium mb-8"> Product Details </p>
                 {/* ── Main: Gallery LEFT | Info RIGHT ── */}

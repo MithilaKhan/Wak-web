@@ -47,10 +47,10 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
     };
 
     return (
-        <aside className="bg-[#353535] rounded-2xl p-6 border border-white/5 space-y-7 sticky top-0 self-start">
+        <aside className="bg-white rounded-2xl p-6 border border-white/5 space-y-7 sticky top-0 self-start">
             {/* Price Range */}
             <div>
-                <h3 className="text-white font-medium text-sm mb-4">Price Range</h3>
+                <h3 className="text-gray-900 font-medium text-sm mb-4">Price Range</h3>
                 <div className="space-y-3">
                     <input
                         type="range"
@@ -61,10 +61,10 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
                         className="w-full accent-[#FF6700] cursor-pointer"
                     />
                     <div className="flex items-center gap-3">
-                        <div className="flex-1 bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-white text-xs font-medium text-center">
+                        <div className="flex-1 bg-[#4f2c1d] border border-white/10 rounded-lg px-3 py-2 text-white text-xs font-medium text-center">
                             ${priceMin}
                         </div>
-                        <div className="flex-1 bg-[#1e1e1e] border border-white/10 rounded-lg px-3 py-2 text-white text-xs font-medium text-center">
+                        <div className="flex-1 bg-[#4f2c1d] border border-white/10 rounded-lg px-3 py-2 text-white text-xs font-medium text-center">
                             ${priceMax}
                         </div>
                     </div>
@@ -76,7 +76,7 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
 
             {/* Category */}
             <div>
-                <h3 className="text-white font-medium text-sm mb-4">Category</h3>
+                <h3 className="text-gray-900 font-medium text-sm mb-4">Category</h3>
                 <div className="space-y-3">
                     {categories.map((cat) => (
                         <label key={cat} className="flex items-center gap-3 cursor-pointer group">
@@ -86,7 +86,7 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
                                 onChange={() => toggleItem(selectedCategories, setSelectedCategories, cat)}
                                 className="w-4 h-4 rounded border-white/20 accent-[#FF6700] cursor-pointer"
                             />
-                            <span className="text-white/70 text-sm group-hover:text-white transition-colors">
+                            <span className="text-gray-700 text-sm group-hover:text-gray-900 transition-colors">
                                 {cat}
                             </span>
                         </label>
@@ -99,7 +99,7 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
 
             {/* Ratings */}
             <div>
-                <h3 className="text-white font-medium text-sm mb-4">Ratings</h3>
+                <h3 className="text-gray-900 font-medium text-sm mb-4">Ratings</h3>
                 <div className="space-y-2">
                     {[4, 3, 2, 1].map((star) => (
                         <label key={star} className="flex items-center gap-3 cursor-pointer group">
@@ -121,7 +121,7 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
                                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                     </svg>
                                 ))}
-                                <span className="text-white/50 text-xs ml-1">& Up</span>
+                                <span className="text-gray-900 text-xs ml-1">& Up</span>
                             </span>
                         </label>
                     ))}
@@ -133,7 +133,7 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
 
             {/* Brands */}
             <div>
-                <h3 className="text-white font-medium text-sm mb-4">Brands</h3>
+                <h3 className="text-gray-900 font-medium text-sm mb-4">Brands</h3>
                 <div className="space-y-3">
                     {brands.map((brand) => (
                         <label key={brand} className="flex items-center gap-3 cursor-pointer group">
@@ -143,7 +143,7 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
                                 onChange={() => toggleItem(selectedBrands, setSelectedBrands, brand)}
                                 className="w-4 h-4 rounded border-white/20 accent-[#FF6700] cursor-pointer"
                             />
-                            <span className="text-white/70 text-sm group-hover:text-white transition-colors">
+                            <span className="text-gray-700 text-sm group-hover:text-gray-900 transition-colors">
                                 {brand}
                             </span>
                         </label>
@@ -156,7 +156,7 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
 
             {/* Offers & Discounts */}
             <div>
-                <h3 className="text-white font-medium text-sm mb-4">Offers & Discounts</h3>
+                <h3 className="text-gray-900 font-medium text-sm mb-4">Offers & Discounts</h3>
                 <div className="space-y-3">
                     {offers.map((offer) => (
                         <label key={offer} className="flex items-center gap-3 cursor-pointer group">
@@ -166,7 +166,7 @@ export default function ShopFilter({ onApply }: ShopFilterProps) {
                                 onChange={() => toggleItem(selectedOffers, setSelectedOffers, offer)}
                                 className="w-4 h-4 rounded border-white/20 accent-[#FF6700] cursor-pointer"
                             />
-                            <span className="text-white/70 text-sm group-hover:text-white transition-colors">
+                            <span className="text-gray-700 text-sm group-hover:text-gray-900 transition-colors">
                                 {offer}
                             </span>
                         </label>

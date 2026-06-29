@@ -25,10 +25,10 @@ export function OtpForm({ onSwitch }: OtpFormProps) {
         <div className="flex justify-center mt-2">
           <InputOTP maxLength={4}>
             <InputOTPGroup className="gap-4">
-              <InputOTPSlot index={0} className="w-14 h-16 bg-[#1E1E1E] border border-zinc-700/50 text-white rounded-xl focus:ring-[#FF6700] focus:border-[#FF6700] text-2xl font-semibold" />
-              <InputOTPSlot index={1} className="w-14 h-16 bg-[#1E1E1E] border border-zinc-700/50 text-white rounded-xl focus:ring-[#FF6700] focus:border-[#FF6700] text-2xl font-semibold" />
-              <InputOTPSlot index={2} className="w-14 h-16 bg-[#1E1E1E] border border-zinc-700/50 text-white rounded-xl focus:ring-[#FF6700] focus:border-[#FF6700] text-2xl font-semibold" />
-              <InputOTPSlot index={3} className="w-14 h-16 bg-[#1E1E1E] border border-zinc-700/50 text-white rounded-xl focus:ring-[#FF6700] focus:border-[#FF6700] text-2xl font-semibold" />
+              <InputOTPSlot index={0} className="w-14 h-16 bg-[#4f2c1d] border border-zinc-700/50 text-white rounded-xl focus:ring-[#FF6700] focus:border-[#FF6700] text-2xl font-semibold" />
+              <InputOTPSlot index={1} className="w-14 h-16 bg-[#4f2c1d] border border-zinc-700/50 text-white rounded-xl focus:ring-[#FF6700] focus:border-[#FF6700] text-2xl font-semibold" />
+              <InputOTPSlot index={2} className="w-14 h-16 bg-[#4f2c1d] border border-zinc-700/50 text-white rounded-xl focus:ring-[#FF6700] focus:border-[#FF6700] text-2xl font-semibold" />
+              <InputOTPSlot index={3} className="w-14 h-16 bg-[#4f2c1d] border border-zinc-700/50 text-white rounded-xl focus:ring-[#FF6700] focus:border-[#FF6700] text-2xl font-semibold" />
             </InputOTPGroup>
           </InputOTP>
         </div>

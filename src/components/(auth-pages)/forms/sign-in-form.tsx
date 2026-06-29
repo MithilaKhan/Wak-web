@@ -33,7 +33,7 @@ export function SignInForm({ onSwitch }: SignInFormProps) {
             id="signin-email"
             type="email"
             placeholder="Enter email address"
-            className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10"
+            className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10"
           />
         </div>
 
@@ -44,7 +44,7 @@ export function SignInForm({ onSwitch }: SignInFormProps) {
               id="signin-password"
               type="password"
               placeholder="********"
-              className="h-13 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10 pr-10"
+              className="h-13 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10 pr-10"
             />
             {/* Password toggle icon could go here */}
           </div>

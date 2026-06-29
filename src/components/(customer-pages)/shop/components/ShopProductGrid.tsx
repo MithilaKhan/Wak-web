@@ -30,7 +30,7 @@ export default function ShopProductGrid() {
             {/* Product Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                 {allProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} bgColor="#1E1E1E" />
+                    <ProductCard key={product.id} product={product} />
                 ))}
             </div>
 

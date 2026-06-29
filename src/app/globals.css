@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1E1E1E;
+  --background: #4f2c1d;
   --foreground: #ffffff;
   --primary: #FF6700;
   --secondary: #99a0fd;
@@ -63,7 +63,7 @@ body {
 .swiper-pagination-bullet {
   width: 10px !important;
   height: 10px !important;
-  background: #555 !important;
+  background: #c8c6c6 !important;
   opacity: 1 !important;
   transition: all 0.3s ease !important;
 }
@@ -71,7 +71,7 @@ body {
 .swiper-pagination-bullet-active {
   width: 30px !important;
   border-radius: 5px !important;
-  background: #d4a373 !important;
+  background: var(--primary) !important;
   /* Tan/Orange color from image */
 }
 

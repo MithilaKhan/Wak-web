@@ -21,22 +21,22 @@ export function SignUpForm({ onSwitch }: SignUpFormProps) {
       <form className="flex flex-col gap-5" onSubmit={(e) => e.preventDefault()}>
         <div className="flex flex-col gap-2">
           <Label htmlFor="signup-name" className="text-white text-sm font-medium">User Name</Label>
-          <Input id="signup-name" type="text" placeholder="Enter full name" className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10" />
+          <Input id="signup-name" type="text" placeholder="Enter full name" className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10" />
         </div>
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="signup-email" className="text-white text-sm font-medium">Email</Label>
-          <Input id="signup-email" type="email" placeholder="Enter email address" className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10" />
+          <Input id="signup-email" type="email" placeholder="Enter email address" className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10" />
         </div>
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="signup-contact" className="text-white text-sm font-medium">Contact Number</Label>
-          <Input id="signup-contact" type="text" placeholder="Enter contact number" className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10" />
+          <Input id="signup-contact" type="text" placeholder="Enter contact number" className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10" />
         </div>
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="signup-password" className="text-white text-sm font-medium">Password</Label>
-          <Input id="signup-password" type="password" placeholder="********" className="h-12 bg-[#1E1E1E] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#1E1E1E]/10 focus:border-[#1E1E1E]/10" />
+          <Input id="signup-password" type="password" placeholder="********" className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10" />
         </div>
 
 

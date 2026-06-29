@@ -9,7 +9,7 @@ const defaultAddress = {
 
 export default function Checkout() {
     return (
-        <div className="min-h-[calc(100vh-180px)] bg-[#1e1e1e] py-[50px]">
+        <div className="min-h-[calc(100vh-180px)] bg-[#4f2c1d] py-[50px]">
             <div className="container mx-auto px-6 max-w-4xl">
                 {/* Order No Header */}
                 <h1 className="text-xl font-medium text-white mb-6 tracking-wide">

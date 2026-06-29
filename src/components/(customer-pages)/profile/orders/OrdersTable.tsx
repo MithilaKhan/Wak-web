@@ -78,7 +78,7 @@ export default function OrdersTable({ onSelectOrder }: OrdersTableProps) {
           {ordersData.map((order, index) => (
             <div
               key={order.id + order.title}
-              className={`grid grid-cols-12 items-center px-6 py-4 transition-colors hover:bg-zinc-800/40 ${index % 2 === 0 ? 'bg-[#1e1e1e]' : 'bg-[#141414]'
+              className={`grid grid-cols-12 items-center px-6 py-4 transition-colors hover:bg-zinc-800/40 ${index % 2 === 0 ? 'bg-[#4f2c1d]' : 'bg-[#141414]'
                 }`}
             >
               {/* ORDER DETAILS */}

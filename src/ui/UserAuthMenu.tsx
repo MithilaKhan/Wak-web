@@ -14,7 +14,7 @@ export default function UserAuthMenu({ isLoggedIn, logout }: UserAuthMenuProps) 
         return (
             <AuthModal
                 trigger={
-                    <button className="text-sm font-bold bg-zinc-800 hover:bg-zinc-700 px-6 py-2.5 rounded-lg transition-colors cursor-pointer text-white">
+                    <button className="text-sm font-bold bg-primary  px-6 py-2.5 rounded-lg transition-colors cursor-pointer text-white">
                         Login
                     </button>
                 }

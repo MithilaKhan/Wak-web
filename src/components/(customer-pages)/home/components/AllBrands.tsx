@@ -52,7 +52,7 @@ const serviceCategoriesMarquee = [
 
 const AllBrands = () => {
     const router = useRouter();
-    const [activeTab, setActiveTab] = useState<'products' | 'services'>('products');
+    const [activeTab, setActiveTab] = useState<'products' | 'services'>('services');
 
     // On mount, sync with existing user-mode cookie if present
     useEffect(() => {
@@ -72,16 +72,16 @@ const AllBrands = () => {
     };
 
     return (
-        <section className="py-12 bg-[#1e1e1e] border-b border-zinc-800/40">
+        <section className="py-12 bg-[#4f2c1d] ">
             {/* Segmented Tab Controller */}
             <div className="flex justify-center mb-10">
-                <div className="inline-flex items-center gap-1.5 bg-[#2a2a2a]/60 p-1.5 rounded-full border border-zinc-800/80">
+                <div className="inline-flex items-center gap-1.5 bg-white/90 p-1.5 rounded-full border border-primary/50">
                     <button
                         onClick={() => handleTabChange('products')}
                         className={`px-8 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
                             activeTab === 'products'
                                 ? 'bg-[#FF6700] text-white shadow-lg shadow-orange-600/20 scale-100'
-                                : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                                : 'text-zinc-800 hover:text-primary hover:bg-white/5'
                         }`}
                     >
                         Products
@@ -91,7 +91,7 @@ const AllBrands = () => {
                         className={`px-8 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
                             activeTab === 'services'
                                 ? 'bg-[#FF6700] text-white shadow-lg shadow-orange-600/20 scale-100'
-                                : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                                : 'text-zinc-700 hover:text-primary hover:bg-white/5'
                         }`}
                     >
                         Services
@@ -100,7 +100,7 @@ const AllBrands = () => {
             </div>
 
             {/* Marquee displays */}
-            <div className="w-full relative overflow-hidden group py-4 bg-[#1a1a1a]/30 border-y border-zinc-800/30">
+            <div className="w-full relative overflow-hidden group py-4 ">
                 <div className="flex select-none">
                     {activeTab === 'products' ? (
                         /* Brands Marquee */
@@ -108,7 +108,7 @@ const AllBrands = () => {
                             {[...brands, ...brands, ...brands].map((brand, index) => (
                                 <div
                                     key={`${brand.id}-${index}`}
-                                    className="inline-flex items-center justify-center w-48 h-24 relative bg-[#2a2a2a]/20 border border-zinc-800/40 rounded-xl px-5 py-3 hover:border-[#FF6700]/30 transition-all duration-300"
+                                    className="inline-flex items-center justify-center w-48 h-24 relative bg-white/5 border border-white/20 rounded-xl px-5 py-3 hover:border-[#FF6700]/30 transition-all duration-300"
                                 >
                                     <Image
                                         src={brand.logo}
@@ -126,7 +126,7 @@ const AllBrands = () => {
                                 <Link
                                     key={`${cat.name}-${index}`}
                                     href={cat.href}
-                                    className="inline-flex flex-col relative w-60 h-36 rounded-2xl overflow-hidden border border-zinc-800/80 shadow-lg group hover:border-[#FF6700]/30 transition-all duration-300 cursor-pointer select-none"
+                                    className="inline-flex flex-col relative w-60 h-36 rounded-2xl overflow-hidden  shadow-lg group  transition-all duration-300 cursor-pointer select-none"
                                 >
                                     {/* Image Background */}
                                     <img
@@ -135,14 +135,14 @@ const AllBrands = () => {
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
                                     {/* Dark Gradient Overlay */}
-                                    <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/40 to-black/10 transition-opacity duration-300 group-hover:from-black/90" />
+                                    <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/30 to-black/10 transition-opacity duration-300 group-hover:from-black/90" />
                                     
                                     {/* Content inside card */}
                                     <div className="absolute bottom-4 left-4 text-left">
-                                        <h4 className="text-white font-bold text-base tracking-wide group-hover:text-[#FFDDA5] transition-colors">
+                                        <h4 className="text-white font-bold text-base tracking-wide group-hover:text-primary transition-colors">
                                             {cat.name}
                                         </h4>
-                                        <span className="text-[10px] text-zinc-400 font-medium uppercase tracking-wider mt-1 block">
+                                        <span className="text-[10px] text-zinc-200 font-medium uppercase tracking-wider mt-1 block">
                                             Explore Services
                                         </span>
                                     </div>

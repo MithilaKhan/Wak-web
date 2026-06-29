@@ -81,16 +81,16 @@ export default function BrowseCategoriesButton() {
             </button>
 
             {isOpen && (
-                <div className="absolute left-0 top-full mt-2 w-[480px] bg-[#1e1e1e] border border-zinc-800 rounded-xl shadow-2xl shadow-black/80 flex overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute left-0 top-full mt-2 w-[480px] bg-[#4f2c1d]/80 border border-white/50 rounded-xl shadow-2xl shadow-black/80 flex overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                     {/* Left Column: Top-level headers (Products, Services) */}
-                    <div className="w-[180px] border-r border-zinc-800/80 bg-[#161616] p-2.5 flex flex-col gap-1.5">
+                    <div className="w-[180px] border-r border-white/80 bg-[#4f2c1d] p-2.5 flex flex-col gap-1.5">
                         <button
                             onMouseEnter={() => setActiveTab('products')}
                             onClick={() => setActiveTab('products')}
                             className={`flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 cursor-pointer text-left group ${
                                 activeTab === 'products'
                                     ? 'bg-[#FF6700] text-white shadow-md shadow-orange-600/20'
-                                    : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                                    : 'text-white hover:text-white hover:bg-white/5'
                             }`}
                         >
                             <span>Products</span>
@@ -102,7 +102,7 @@ export default function BrowseCategoriesButton() {
                             className={`flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 cursor-pointer text-left group ${
                                 activeTab === 'services'
                                     ? 'bg-[#FF6700] text-white shadow-md shadow-orange-600/20'
-                                    : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                                    : 'text-white hover:text-white hover:bg-white/5'
                             }`}
                         >
                             <span>Services</span>
@@ -111,7 +111,7 @@ export default function BrowseCategoriesButton() {
                     </div>
 
                     {/* Right Column: Subcategories list depending on activeTab */}
-                    <div className="flex-1 p-3 bg-[#1e1e1e] max-h-[360px] overflow-y-auto animate-in fade-in duration-200">
+                    <div className="flex-1 p-3 bg-[#4f2c1d] max-h-[360px] overflow-y-auto animate-in fade-in duration-200">
                         <div className="grid grid-cols-1 gap-1">
                             {(activeTab === 'products' ? productCategories : serviceCategories).map((category) => {
                                 const Icon = category.icon;
@@ -120,9 +120,9 @@ export default function BrowseCategoriesButton() {
                                         key={category.name}
                                         href={category.href}
                                         onClick={() => setIsOpen(false)}
-                                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium group"
+                                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-300 hover:text-primary hover:bg-white/5 rounded-lg transition-colors font-medium group"
                                     >
-                                        <Icon className="w-4.5 h-4.5 text-zinc-500 group-hover:text-[#FF6700] transition-colors" />
+                                        <Icon className="w-4.5 h-4.5 text-white group-hover:text-[#FF6700] transition-colors" />
                                         <span>{category.name}</span>
                                     </Link>
                                 );
