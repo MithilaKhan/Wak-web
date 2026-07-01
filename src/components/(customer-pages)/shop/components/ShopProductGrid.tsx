@@ -35,28 +35,32 @@ export default function ShopProductGrid() {
             </div>
 
             {/* Pagination + Info Row */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 pb-4 ">
+            <div className="flex items-center justify-center gap-4 pt-8 pb-4">
                 <Pagination>
-                    <PaginationContent>
+                    <PaginationContent className="gap-2">
                         <PaginationItem>
-                            <PaginationPrevious href="#" />
+                            <PaginationPrevious href="#" className="bg-white border border-zinc-200 text-zinc-800 hover:bg-zinc-100 hover:text-zinc-900 transition-all duration-200 shadow-sm rounded-xl cursor-pointer" />
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink href="#">1</PaginationLink>
+                            <PaginationLink href="#" className="bg-white border border-zinc-200 text-zinc-800 hover:bg-zinc-100 hover:text-zinc-900 transition-all duration-200 shadow-sm rounded-xl cursor-pointer">
+                                1
+                            </PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink href="#" isActive>
+                            <PaginationLink href="#" isActive className="bg-primary border border-primary text-white shadow-md shadow-primary/20 hover:bg-orange-500 transition-all duration-200 rounded-xl cursor-pointer">
                                 2
                             </PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink href="#">3</PaginationLink>
+                            <PaginationLink href="#" className="bg-white border border-zinc-200 text-zinc-800 hover:bg-zinc-100 hover:text-zinc-900 transition-all duration-200 shadow-sm rounded-xl cursor-pointer">
+                                3
+                            </PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationEllipsis />
+                            <PaginationEllipsis className="bg-white border border-zinc-200 text-zinc-800 rounded-xl h-10 w-10 shadow-sm flex items-center justify-center" />
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationNext href="#" />
+                            <PaginationNext href="#" className="bg-white border border-zinc-200 text-zinc-800 hover:bg-zinc-100 hover:text-zinc-900 transition-all duration-200 shadow-sm rounded-xl cursor-pointer" />
                         </PaginationItem>
                     </PaginationContent>
                 </Pagination>

@@ -3,11 +3,11 @@ import React from 'react'
 function AboutUsPage() {
     return (
         <div className="container mx-auto py-[50px]">
-            <div className="bg-[#3a3a3a] rounded-lg p-3 ps-6 mb-6 ">
-                <h1 className="text-2xl ">About us</h1>
+            <div className="bg-white/30  backdrop-blur-md rounded-lg p-3 ps-6 mb-6 ">
+                <h1 className="text-2xl text-white ">About us</h1>
             </div>
 
-            <div className="space-y-6 text-gray-300 leading-relaxed border border-gray-600 p-4 rounded-lg">
+            <div className="space-y-6 text-white/80 leading-relaxed border border-white/20 p-4 rounded-lg">
                 <p>
                     Welcome to <span className="text-orange-500">[Website Name]</span>, your ultimate online destination for discovering businesses, services, and solutions tailored to your needs. We are committed to simplifying the process of finding trusted businesses across various industries with a user-friendly platform that puts convenience at the forefront. Whether you're seeking a local café, a professional service, or a specialized provider, our website connects you with a vast network of businesses that meet your specific criteria.
                 </p>

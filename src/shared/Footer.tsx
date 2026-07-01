@@ -34,7 +34,7 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
                     {/* Logo & Description */}
                     <div className="lg:col-span-4">
-                        <Link href="/" className="inline-flex items-center justify-center w-32 h-14 border border-zinc-700 rounded-lg mb-8">
+                        <Link href="/" className="inline-flex items-center justify-center w-32 h-14 border border-white rounded-lg mb-8">
                             <span className="text-white font-semibold tracking-wider text-xl">LOGO</span>
                         </Link>
 
@@ -49,7 +49,7 @@ export default function Footer() {
                                 <Link
                                     key={social.label}
                                     href={social.href}
-                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-zinc-800 border border-zinc-800 text-white hover:border-orange-500 hover:text-orange-500 transition-all"
+                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary border border-primary text-white transition-all"
                                     aria-label={social.label}
                                 >
                                     <social.icon className="w-4 h-4" />

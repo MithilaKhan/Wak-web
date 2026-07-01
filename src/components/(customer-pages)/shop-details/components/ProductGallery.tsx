@@ -30,10 +30,10 @@ export default function ProductGallery({ images, name }: ProductGalleryProps) {
                     <button
                         key={idx}
                         onClick={() => setActiveIndex(idx)}
-                        className={`relative w-20 h-20 rounded-xl border-2 overflow-hidden shrink-0 transition-all duration-200 cursor-pointer group
+                        className={`relative w-20 h-20 rounded-xl border-2 overflow-hidden shrink-0 transition-all duration-200 cursor-pointer group bg-white
                             ${activeIndex === idx
-                                ? "border-[#FF6700] shadow-lg shadow-orange-900/40 scale-105"
-                                : "border-white/8 hover:border-[#FF6700]/50 bg-[#2B2B2B]"
+                                ? "border-[#FF6700] shadow-lg shadow-orange-950/20 scale-105"
+                                : "border-white/8 hover:border-[#FF6700]/50"
                             }`}
                     >
                         <div className={`absolute inset-0 transition-opacity duration-200 ${activeIndex === idx ? "opacity-0" : "opacity-0 group-hover:opacity-100"} bg-[#FF6700]/5`} />
@@ -50,7 +50,7 @@ export default function ProductGallery({ images, name }: ProductGalleryProps) {
             {/* Main Image */}
             <div className="flex-1 flex flex-col gap-3 order-1 md:order-2">
                 <div
-                    className="relative w-full aspect-square bg-linear-to-br from-[#2B2B2B] to-[#232323] rounded-2xl border border-white/8 overflow-hidden cursor-zoom-in"
+                    className="relative w-full aspect-square bg-white rounded-2xl border border-white/8 overflow-hidden cursor-zoom-in"
                     onMouseMove={handleMouseMove}
                     onMouseEnter={() => setIsZoomed(true)}
                     onMouseLeave={() => setIsZoomed(false)}
@@ -82,6 +82,6 @@ export default function ProductGallery({ images, name }: ProductGalleryProps) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

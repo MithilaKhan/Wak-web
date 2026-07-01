@@ -29,7 +29,7 @@ export default function NavLinks({ userMode }: { userMode: string }) {
                     <Link
                         key={link.name}
                         href={link.href}
-                        className={`hover:text-[#FFDDA5] transition-colors duration-200 font-normal text-sm py-2.5 xl:py-0 border-b border-white/5 xl:border-0 ${isActive ? 'text-[#FFDDA5] font-medium' : 'text-white'}`}
+                        className={`hover:text-primary transition-colors duration-200 font-normal text-sm py-2.5 xl:py-0 border-b border-white/5 xl:border-0 ${isActive ? 'text-primary font-medium' : 'text-white'}`}
                     >
                         {link.name}
                     </Link>

@@ -75,24 +75,22 @@ const AllBrands = () => {
         <section className="py-12 bg-[#4f2c1d] ">
             {/* Segmented Tab Controller */}
             <div className="flex justify-center mb-10">
-                <div className="inline-flex items-center gap-1.5 bg-white/90 p-1.5 rounded-full border border-primary/50">
+                <div className="inline-flex items-center gap-1.5 bg-white p-1.5 rounded-full border border-primary/50">
                     <button
                         onClick={() => handleTabChange('products')}
-                        className={`px-8 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                            activeTab === 'products'
+                        className={`px-8 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${activeTab === 'products'
                                 ? 'bg-[#FF6700] text-white shadow-lg shadow-orange-600/20 scale-100'
                                 : 'text-zinc-800 hover:text-primary hover:bg-white/5'
-                        }`}
+                            }`}
                     >
                         Products
                     </button>
                     <button
                         onClick={() => handleTabChange('services')}
-                        className={`px-8 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                            activeTab === 'services'
+                        className={`px-8 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${activeTab === 'services'
                                 ? 'bg-[#FF6700] text-white shadow-lg shadow-orange-600/20 scale-100'
                                 : 'text-zinc-700 hover:text-primary hover:bg-white/5'
-                        }`}
+                            }`}
                     >
                         Services
                     </button>
@@ -136,7 +134,7 @@ const AllBrands = () => {
                                     />
                                     {/* Dark Gradient Overlay */}
                                     <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/30 to-black/10 transition-opacity duration-300 group-hover:from-black/90" />
-                                    
+
                                     {/* Content inside card */}
                                     <div className="absolute bottom-4 left-4 text-left">
                                         <h4 className="text-white font-bold text-base tracking-wide group-hover:text-primary transition-colors">

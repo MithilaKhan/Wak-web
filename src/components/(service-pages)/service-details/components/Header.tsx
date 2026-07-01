@@ -65,7 +65,7 @@ export default function Header() {
                                     <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
                                     <span className="text-white font-semibold ml-1">{headerData.rating.stars}</span>
                                 </div>
-                                <span className="text-gray-400">({headerData.rating.reviews} REVIEWS)</span>
+                                <span className="text-white/70">({headerData.rating.reviews} REVIEWS)</span>
                             </div>
 
                         </div>

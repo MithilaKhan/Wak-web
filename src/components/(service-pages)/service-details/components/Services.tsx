@@ -23,7 +23,7 @@ export default function Services() {
             <h2 className="text-xl font-medium text-white mb-3">Services We Offer</h2>
             <ul className="space-y-1.5">
                 {servicesData.map((service) => (
-                    <li key={service.id} className="flex items-start gap-3 text-gray-300">
+                    <li key={service.id} className="flex items-start gap-3 text-white/80">
                         <span className="text-white font-bold text-lg leading-none mt-1">•</span>
                         <span className="text-sm">{service.name}</span>
                     </li>

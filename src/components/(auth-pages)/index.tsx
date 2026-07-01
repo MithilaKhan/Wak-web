@@ -12,7 +12,7 @@ export default function AuthModal({ trigger }: AuthModalProps) {
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>
-      <DialogContent className="max-w-[600px] p-0 overflow-hidden border-none  shadow-none [&>button]:text-white [&>button]:opacity-100 [&>button]:top-6 [&>button]:right-6 ">
+      <DialogContent className="max-w-[600px] p-0 overflow-hidden border-none shadow-none [&>button]:text-zinc-500 [&>button]:hover:text-zinc-800 [&>button]:opacity-100 [&>button]:top-6 [&>button]:right-6 ">
         <AuthContainer />
       </DialogContent>
     </Dialog>

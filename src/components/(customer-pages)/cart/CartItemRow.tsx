@@ -33,11 +33,11 @@ export default function CartItemRow({
     };
 
     return (
-        <div className="group p-5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+        <div className="group p-5 rounded-xl bg-white/10 border border-zinc-200/50 shadow-md hover:shadow-lg transition-all duration-300">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <div className="flex items-center gap-4 w-full sm:w-auto flex-1">
                     {/* Product Image */}
-                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg bg-black shrink-0 overflow-hidden ">
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg bg-zinc-50 border border-zinc-100 shrink-0 overflow-hidden flex items-center justify-center">
                         <Image
                             src={item.image}
                             alt={item.name}
@@ -59,35 +59,35 @@ export default function CartItemRow({
                 </div>
 
                 {/* Controls & Delete button grouped together on mobile */}
-                <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto pt-4 sm:pt-0 border-t border-white/5 sm:border-0">
+                <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto pt-4 sm:pt-0 border-t border-zinc-100 sm:border-0">
                     {/* Quantity Controls */}
-                    <div className="flex items-center gap-1 bg-white/10 rounded-lg p-1">
+                    <div className="flex items-center gap-1 bg-zinc-100 rounded-lg p-1 border border-zinc-200/50">
                         <button
                             onClick={handleMinus}
-                            className="p-1.5 hover:bg-white/20 rounded transition-colors"
+                            className="p-1.5 hover:bg-zinc-200 rounded transition-colors cursor-pointer"
                             aria-label="Decrease quantity"
                         >
-                            <Minus size={14} className="text-white" />
+                            <Minus size={14} className="text-zinc-600" />
                         </button>
                         <input
                             type="text"
                             value={quantity}
                             readOnly
-                            className="w-8 h-8 text-center bg-white/20 rounded text-white font-semibold text-xs sm:text-sm outline-none"
+                            className="w-8 h-8 text-center bg-white rounded text-zinc-900 border border-zinc-200/80 font-semibold text-xs sm:text-sm outline-none"
                         />
                         <button
                             onClick={handlePlus}
-                            className="p-1.5 hover:bg-white/20 rounded transition-colors"
+                            className="p-1.5 hover:bg-zinc-200 rounded transition-colors cursor-pointer"
                             aria-label="Increase quantity"
                         >
-                            <Plus size={14} className="text-white" />
+                            <Plus size={14} className="text-zinc-600" />
                         </button>
                     </div>
 
                     {/* Delete Button */}
                     <button
                         onClick={() => onRemove?.(item.id)}
-                        className="p-2 sm:p-2.5 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors shrink-0"
+                        className="p-2 sm:p-2.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition-colors shrink-0 cursor-pointer"
                         aria-label="Remove item"
                     >
                         <Trash2 size={16} />

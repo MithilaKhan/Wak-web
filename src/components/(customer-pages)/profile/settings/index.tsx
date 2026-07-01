@@ -17,17 +17,16 @@ export default function SettingsPage() {
 
   return (
     <DashboardCard>
-      {/* Tab Navigation */}
-      <div className="flex items-center gap-6 border-b border-zinc-800/50 mb-8">
+      <div className="flex items-center gap-6 border-b border-zinc-200 mb-8">
         {tabs.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`
-              pb-3 text-base font-normal transition-colors cursor-pointer
+              pb-3 text-base transition-colors cursor-pointer
               ${activeTab === tab.key
-                ? "text-white border-b-2 border-[#FF6700]"
-                : "text-white/72 hover:text-zinc-300"
+                ? "text-primary font-bold border-b-2 border-primary"
+                : "text-zinc-500 hover:text-zinc-800 font-semibold"
               }
             `}
           >

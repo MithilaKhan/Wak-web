@@ -13,20 +13,20 @@ export default async function ProfileSidebar() {
     userMode === "service" ? serviceSidebar : customerSidebar;
 
   return (
-    <aside className="bg-[#353535]  flex flex-col h-fit lg:sticky lg:top-6">
+    <aside className="bg-white border border-zinc-200/50 shadow-md rounded-2xl overflow-hidden flex flex-col h-fit lg:sticky lg:top-6">
       {/* Profile Header */}
-      <div className="flex flex-col items-center gap-2 pt-8 pb-6 px-6">
-        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-zinc-700 ring-2 ring-[#4f2c1d]">
+      <div className="flex flex-col items-center gap-2 pt-8 pb-6 px-6 border-b border-zinc-100">
+        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-zinc-200 ring-2 ring-zinc-100">
           <img
             src="https://i.pravatar.cc/150?img=68"
             alt="Profile"
             className="w-full h-full object-cover"
           />
         </div>
-        <h3 className="text-white/72 font-semibold text-lg mt-1">
+        <h3 className="text-zinc-900 font-bold text-lg mt-1">
           Ziad Aboultaif
         </h3>
-        <p className="text-white/72 text-sm">ziad@gmail.com</p>
+        <p className="text-zinc-500 text-sm">ziad@gmail.com</p>
       </div>
 
       {/* Navigation + Logout */}

@@ -2,7 +2,7 @@
 
 :root {
   --background: #4f2c1d;
-  --foreground: #ffffff;
+  --foreground: #302f2f;
   --primary: #FF6700;
   --secondary: #99a0fd;
   --inputBg: #353535;
@@ -18,8 +18,12 @@
 }
 
 @layer utilities {
-  .title {
+  .auth-title {
     @apply text-xl sm:text-2xl lg:text-3xl font-semibold text-foreground mb-10.5;
+  }
+
+  .title {
+    @apply text-xl sm:text-2xl lg:text-3xl font-semibold text-white mb-10.5;
   }
 
   .section-subtitle {

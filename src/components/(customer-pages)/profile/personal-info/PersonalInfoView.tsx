@@ -12,36 +12,36 @@ export default function PersonalInfoView({ userData }: PersonalInfoViewProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {/* User Name */}
       <div className="space-y-2">
-        <label className="text-sm font-normal text-white/70">User Name</label>
-        <div className="h-12 px-4 flex items-center bg-[#2e2d2d] mt-3 rounded-xl text-sm text-white border border-zinc-700/50">
+        <label className="text-sm font-semibold text-zinc-500">User Name</label>
+        <div className="h-12 px-4 flex items-center bg-zinc-50 mt-2 rounded-xl text-sm text-zinc-850 border border-zinc-200">
           {userData.username}
         </div>
       </div>
-
+ 
       {/* Email */}
       <div className="space-y-2">
-        <label className="text-sm font-normal text-white/70">Email</label>
-        <div className="h-12 px-4 flex items-center bg-[#2e2d2d] mt-3 rounded-xl text-sm text-white border border-zinc-700/50">
+        <label className="text-sm font-semibold text-zinc-500">Email</label>
+        <div className="h-12 px-4 flex items-center bg-zinc-50 mt-2 rounded-xl text-sm text-zinc-850 border border-zinc-200">
           {userData.email}
         </div>
       </div>
-
+ 
       {/* Contact Number */}
       <div className="space-y-2">
-        <label className="text-sm font-normal text-white/70">
+        <label className="text-sm font-semibold text-zinc-500">
           Contact Number
         </label>
-        <div className="h-12 px-4 flex items-center bg-[#2e2d2d] mt-3 rounded-xl text-sm text-white border border-zinc-700/50">
+        <div className="h-12 px-4 flex items-center bg-zinc-50 mt-2 rounded-xl text-sm text-zinc-850 border border-zinc-200">
           {userData.phone}
         </div>
       </div>
-
+ 
       {/* Country */}
       <div className="space-y-2">
-        <label className="text-sm font-normal text-white/70">
+        <label className="text-sm font-semibold text-zinc-500">
           Choose country
         </label>
-        <div className="h-12 px-4 flex items-center bg-[#2e2d2d] mt-3 rounded-xl text-sm text-zinc-400 border border-zinc-700/50">
+        <div className="h-12 px-4 flex items-center bg-zinc-50 mt-2 rounded-xl text-sm text-zinc-400 border border-zinc-200">
           {userData.country || "Select country name"}
         </div>
       </div>

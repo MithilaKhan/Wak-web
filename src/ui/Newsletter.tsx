@@ -29,12 +29,12 @@ const Newsletter = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your email"
-                    className="w-full bg-transparent border-b border-zinc-700 focus:border-white py-3 pr-10 text-base outline-none transition-all placeholder:text-zinc-500 text-white"
+                    className="w-full bg-transparent border-b border-white focus:border-white py-3 pr-10 text-base outline-none transition-all placeholder:text-white/50 text-white"
                     required
                 />
                 <button
                     type="submit"
-                    className="absolute right-0 p-2 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                    className="absolute right-0 p-2 text-white hover:text-white transition-colors cursor-pointer"
                     aria-label="Subscribe"
                 >
                     <SendHorizontal className="w-6 h-6 rotate-[-15deg]" />

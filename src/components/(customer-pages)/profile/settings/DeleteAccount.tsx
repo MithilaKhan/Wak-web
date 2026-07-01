@@ -22,11 +22,11 @@ export default function DeleteAccount() {
   };
 
   return (
-    <div className="text-white space-y-8">
+    <div className="text-zinc-850 space-y-8">
       {/* Header Info */}
       <div>
-        <h2 className="text-xl font-medium text-white mb-4 tracking-tight">Account Deletion Request</h2>
-        <div className="space-y-3 text-sm text-zinc-400 leading-relaxed">
+        <h2 className="text-xl font-bold text-zinc-900 mb-4 tracking-tight">Account Deletion Request</h2>
+        <div className="space-y-3 text-sm text-zinc-600 leading-relaxed font-medium">
           <p>
             - If you delete your Account, you will lose your Account&apos;s Order History, Star Points, Saved PCs, Product Wishlist, and other Data that are related to your Account.
           </p>
@@ -35,10 +35,10 @@ export default function DeleteAccount() {
           </p>
         </div>
       </div>
-
+ 
       {/* Reason Selection */}
       <div>
-        <h3 className="text-lg font-medium text-white mb-4 tracking-tight">Reason for Deletion</h3>
+        <h3 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Reason for Deletion</h3>
         <div className="space-y-3.5">
           {reasons.map((reason) => {
             const isSelected = selectedReason === reason.id;
@@ -50,13 +50,13 @@ export default function DeleteAccount() {
               >
                 <div
                   className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${isSelected
-                    ? "bg-[#4f2c1d] border-zinc-500 text-white"
-                    : "bg-[#4f2c1d] border-zinc-700 text-transparent group-hover:border-zinc-500"
+                    ? "bg-primary border-primary text-white"
+                    : "bg-zinc-50 border-zinc-300 text-transparent group-hover:border-zinc-400"
                     }`}
                 >
                   <Check className={`w-3.5 h-3.5 ${isSelected ? "text-white" : "opacity-0"}`} />
                 </div>
-                <span className="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors">
+                <span className="text-sm font-semibold text-zinc-600 group-hover:text-zinc-900 transition-colors">
                   {reason.label}
                 </span>
               </div>
@@ -64,10 +64,10 @@ export default function DeleteAccount() {
           })}
         </div>
       </div>
-
+ 
       {/* Password Input */}
       <div className="space-y-2.5 max-w-full">
-        <label htmlFor="delete-password" className="text-sm font-medium text-zinc-300">
+        <label htmlFor="delete-password" className="text-sm font-semibold text-zinc-700">
           Current Password
         </label>
         <div className="relative">
@@ -77,28 +77,28 @@ export default function DeleteAccount() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="********"
-            className="h-12 bg-[#4f2c1d] border-zinc-700/50 text-white mt-2.5 rounded-xl placeholder:text-zinc-500 focus:ring-[#4f2c1d]/10 focus:border-[#4f2c1d]/10 pr-12"
+            className="h-12 bg-zinc-50 border border-zinc-200 text-zinc-900 mt-2 rounded-xl placeholder:text-zinc-400 focus:bg-white focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:border-primary pr-12"
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 mt-1 text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer"
+            className="absolute right-4 top-1/2 -translate-y-1/2 mt-1 text-zinc-400 hover:text-zinc-650 transition-colors cursor-pointer"
             aria-label="Toggle password visibility"
           >
             {showPassword ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
           </button>
         </div>
       </div>
-
+ 
       {/* Bottom Action Buttons */}
-      <div className="flex items-center justify-end gap-4 pt-6 border-t border-zinc-800/60">
+      <div className="flex items-center justify-end gap-4 pt-6 border-t border-zinc-100">
         <button
           type="button"
           onClick={() => {
             setSelectedReason("");
             setPassword("");
           }}
-          className="px-8 py-2.5 bg-[#522b2b] hover:bg-[#633434] text-[#f87171] text-sm font-semibold rounded-lg transition-colors cursor-pointer shadow-md"
+          className="px-8 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 text-sm font-semibold rounded-xl transition-colors cursor-pointer"
         >
           Cancel
         </button>
@@ -106,7 +106,7 @@ export default function DeleteAccount() {
           type="button"
           disabled={!selectedReason || !password.trim()}
           onClick={handleDelete}
-          className="px-8 py-2.5 bg-[#FF6700] hover:bg-orange-600 disabled:opacity-50 disabled:hover:bg-[#FF6700] text-white text-sm font-semibold rounded-lg transition-colors cursor-pointer shadow-md"
+          className="px-8 py-2.5 bg-primary hover:bg-orange-500 disabled:opacity-50 disabled:hover:bg-primary text-white text-sm font-bold rounded-xl transition-colors cursor-pointer shadow-md shadow-orange-500/10"
         >
           Confirm
         </button>

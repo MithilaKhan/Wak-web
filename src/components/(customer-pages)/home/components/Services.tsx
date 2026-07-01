@@ -101,7 +101,7 @@ const Services = () => {
         router.refresh();
     };
     return (
-        <section className="py-[50px] bg-[#4f2c1d]">
+        <section className="py-[50px]">
             <div className="container mx-auto px-4">
                 {/* Header */}
 

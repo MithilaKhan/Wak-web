@@ -62,9 +62,9 @@ export default function Pricing() {
                 </div>
 
                 {/* Progress Bar */}
-                <div className="relative h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                <div className="relative h-1.5 bg-white/20 rounded-full overflow-hidden">
                     <div
-                        className="h-full bg-[#FFDDA5] transition-all duration-300"
+                        className="h-full bg-primary transition-all duration-300"
                         style={{
                             width: `${((selectedIndex + 1) / pricingData.length) * 100}%`
                         }}
@@ -73,7 +73,7 @@ export default function Pricing() {
             </div>
 
             {/* Pricing Card */}
-            <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 hover:border-orange-400 transition-colors duration-300">
+            <div className="bg-white/15 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:border-orange-400 transition-colors duration-300">
                 <div className="mb-4">
                     <div className="flex items-center justify-between mb-4">
                         <span className="text-4xl font-medium text-white">${currentOption.price}</span>

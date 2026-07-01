@@ -58,20 +58,20 @@ const ProductCart = () => {
 
             {isEmpty ? (
                 /* Empty State */
-                <div className="max-w-7xl mx-auto">
-                    <div className="rounded-2xl bg-linear-to-br from-white/5 to-white/20 border border-white/10 backdrop-blur-xl p-16 text-center">
-                        <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-6">
-                            <ShoppingCart size={40} className="text-white/40" />
+                <div className="max-w-3xl mx-auto px-4">
+                    <div className="rounded-2xl bg-white border border-zinc-200/50 shadow-xl p-16 text-center">
+                        <div className="w-20 h-20 rounded-full bg-zinc-100 border border-zinc-200/60 flex items-center justify-center mx-auto mb-6">
+                            <ShoppingCart size={40} className="text-zinc-400" />
                         </div>
-                        <h2 className="text-2xl font-bold text-white mb-3">
+                        <h2 className="text-2xl font-bold text-zinc-900 mb-3">
                             Your cart is empty
                         </h2>
-                        <p className="text-white/60 mb-8">
+                        <p className="text-zinc-500 mb-8 font-medium">
                             Add items to your cart to get started
                         </p>
                         <Link
                             href="/"
-                            className="inline-block px-8 py-3 rounded-lg bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                            className="inline-block px-8 py-3.5 rounded-xl bg-primary hover:bg-orange-500 text-white font-bold transition-all duration-300 shadow-md shadow-orange-500/20 hover:-translate-y-0.5 cursor-pointer"
                         >
                             Continue Shopping
                         </Link>
@@ -79,7 +79,8 @@ const ProductCart = () => {
                 </div>
             ) : (
                 /* Cart with Items */
-                <div className="container mx-auto">
+                <div className="container mx-auto px-4">
+                    <h1 className="text-2xl font-bold text-white mb-8">Shopping Cart</h1>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {/* Items Section */}
                         <div className="lg:col-span-2 space-y-4">
@@ -92,7 +93,7 @@ const ProductCart = () => {
                                 />
                             ))}
                         </div>
-
+ 
                         {/* Summary Section */}
                         <div className="lg:col-span-1">
                             <OrderSummary items={items} deliveryFee={deliveryFee} />

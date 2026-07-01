@@ -115,17 +115,17 @@ export default function OrderTrackingPage() {
   };
 
   return (
-    <DashboardCard className="p-8 sm:p-10 rounded-2xl bg-[#353535] border border-white/5 shadow-xl">
+    <DashboardCard className="p-8 sm:p-10 rounded-2xl bg-white border border-zinc-200/50 shadow-md">
       {/* Header */}
       <div className="text-center max-w-xl mx-auto mb-10">
-        <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-wide">
+        <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-wide">
           Track Your Order
         </h1>
-        <p className="text-sm text-zinc-300 mt-2">
+        <p className="text-sm text-zinc-500 mt-2">
           Enter your order number to track your package
         </p>
       </div>
-
+ 
       {/* Search Bar */}
       <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4 max-w-3xl mx-auto mb-12">
         <div className="relative flex-1">
@@ -134,50 +134,50 @@ export default function OrderTrackingPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Enter order number (e.g., #ORB123456)"
-            className="w-full bg-[#1c1c1c] border border-zinc-800 focus:border-orange-500 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-zinc-500 outline-none transition-all shadow-inner"
+            className="w-full bg-zinc-50 border border-zinc-200 focus:border-primary focus:bg-white rounded-xl px-5 py-3.5 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none transition-all shadow-sm focus:ring-1 focus:ring-primary"
           />
         </div>
         <button
           type="submit"
           disabled={isSearching}
-          className="bg-[#FBD59A] hover:bg-[#f0c889] text-zinc-900 px-8 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2.5 transition-all duration-200 shrink-0 cursor-pointer shadow-lg shadow-[#FBD59A]/10 active:scale-95 disabled:opacity-70 disabled:pointer-events-none"
+          className="bg-primary hover:bg-orange-500 text-white px-8 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2.5 transition-all duration-200 shrink-0 cursor-pointer shadow-md shadow-orange-500/10 active:scale-95 disabled:opacity-70 disabled:pointer-events-none"
         >
           {isSearching ? (
-            <div className="w-4 h-4 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
           ) : (
             <Search className="w-4 h-4 shrink-0 font-bold" />
           )}
           <span>Track Order</span>
         </button>
       </form>
-
+ 
       {/* Order Info Summary */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4  pb-8 mb-5 text-sm">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-8 mb-5 text-sm border-b border-zinc-100">
         <div className="space-y-3 font-normal">
           <div className="flex items-center gap-8">
-            <span className="text-white/72 w-36">Order ID</span>
-            <span className="text-white font-medium">: {activeOrder.orderId}</span>
+            <span className="text-zinc-500 w-36">Order ID</span>
+            <span className="text-zinc-900 font-semibold">: {activeOrder.orderId}</span>
           </div>
           <div className="flex items-center gap-8">
-            <span className="text-white/72 w-36">Estimated Delivery</span>
-            <span className="text-white font-medium">: {activeOrder.estimatedDelivery}</span>
+            <span className="text-zinc-500 w-36">Estimated Delivery</span>
+            <span className="text-zinc-900 font-semibold">: {activeOrder.estimatedDelivery}</span>
           </div>
         </div>
-
-        <div className="flex  items-center justify-end gap-2">
-          <span className="text-white/72 text-xs">Current Status:</span>
-          <span className="bg-[#00D26A] text-white px-5 py-1.5 rounded-full font-semibold text-xs tracking-wide shadow-lg shadow-[#00D26A]/20 inline-block">
+ 
+        <div className="flex items-center justify-end gap-2">
+          <span className="text-zinc-500 text-xs">Current Status:</span>
+          <span className="bg-[#00D26A] text-white px-5 py-1.5 rounded-full font-bold text-xs tracking-wide shadow-lg shadow-[#00D26A]/20 inline-block">
             {activeOrder.currentStatus}
           </span>
         </div>
       </div>
-
+ 
       {/* Order Status Timeline */}
       <div className="max-w-3xl ">
-        <h3 className="text-[#FBD59A] font-medium text-lg mb-8 tracking-wide">
+        <h3 className="text-primary font-bold text-lg mb-8 tracking-wide">
           Order Status
         </h3>
-
+ 
         <div className="space-y-0">
           {activeOrder.steps.map((step, index) => (
             <div key={index} className="flex gap-6 items-start min-h-[90px] group">
@@ -186,24 +186,24 @@ export default function OrderTrackingPage() {
                   <step.icon className="w-5 h-5 shrink-0" />
                 </div>
                 {index < activeOrder.steps.length - 1 && (
-                  <div className="w-0 flex-1 border-l-2 border-dashed border-zinc-600 my-1.5" />
+                  <div className="w-0 flex-1 border-l-2 border-dashed border-zinc-200 my-1.5" />
                 )}
               </div>
-
+ 
               <div className="flex flex-col pb-8 pt-1">
-                <h4 className="text-white font-medium text-base tracking-wide">
+                <h4 className="text-zinc-800 font-semibold text-base tracking-wide">
                   {step.title}
                 </h4>
-                <p className="text-zinc-300 text-sm mt-1.5 leading-relaxed font-normal">
+                <p className="text-zinc-650 text-sm mt-1.5 leading-relaxed font-normal">
                   {step.description}
                 </p>
                 {step.time && (
-                  <span className="text-zinc-500 text-xs mt-1.5 font-normal">
+                  <span className="text-zinc-400 text-xs mt-1.5 font-normal">
                     {step.time}
                   </span>
                 )}
                 {step.expected && (
-                  <span className="text-white/72 text-xs mt-1.5 font-normal">
+                  <span className="text-zinc-500 text-xs mt-1.5 font-normal">
                     {step.expected}
                   </span>
                 )}

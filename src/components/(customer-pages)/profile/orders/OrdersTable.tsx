@@ -53,74 +53,74 @@ export default function OrdersTable({ onSelectOrder }: OrdersTableProps) {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-medium text-white tracking-tight">My Orders</h1>
-          <p className="text-sm text-white/72 mt-1">Manage and track all your active service requests.</p>
+          <h1 className="text-2xl font-bold text-zinc-900 tracking-tight">My Orders</h1>
+          <p className="text-sm text-zinc-500 mt-1">Manage and track all your active service requests.</p>
         </div>
-
-        <button className="flex items-center gap-2 px-4 py-2.5 bg-[#fbe1b3] hover:bg-[#f3d299] text-zinc-950 font-semibold text-sm rounded-lg transition-colors cursor-pointer shadow-md self-start sm:self-auto shrink-0">
+ 
+        <button className="flex items-center gap-2 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-semibold text-sm rounded-lg border border-zinc-200 transition-colors cursor-pointer shadow-sm self-start sm:self-auto shrink-0">
           <Plus className="w-4 h-4 stroke-[2.5]" /> Add Order
         </button>
       </div>
-
+ 
       {/* Orders Table Container */}
-      <div className="rounded-xl overflow-hidden border border-zinc-800 bg-[#141414] shadow-xl">
+      <div className="rounded-xl overflow-hidden border border-zinc-200 bg-white shadow-md">
         {/* Table Header Bar */}
-        <div className="bg-[#5c2e16] text-[#f98b3c] grid grid-cols-12 px-6 py-4 text-xs font-bold uppercase tracking-wider">
+        <div className="bg-primary/5 text-primary border-b border-zinc-250/20 grid grid-cols-12 px-6 py-4 text-xs font-bold uppercase tracking-wider">
           <div className="col-span-5">ORDER DETAILS</div>
           <div className="col-span-3">SELLER</div>
           <div className="col-span-2">AMOUNT</div>
           <div className="col-span-1 text-center">STATUS</div>
           <div className="col-span-1 text-center">ACTION</div>
         </div>
-
+ 
         {/* Table Rows */}
-        <div className="divide-y divide-zinc-800/60">
+        <div className="divide-y divide-zinc-100">
           {ordersData.map((order, index) => (
             <div
               key={order.id + order.title}
-              className={`grid grid-cols-12 items-center px-6 py-4 transition-colors hover:bg-zinc-800/40 ${index % 2 === 0 ? 'bg-[#4f2c1d]' : 'bg-[#141414]'
+              className={`grid grid-cols-12 items-center px-6 py-4.5 transition-colors hover:bg-zinc-50/80 ${index % 2 === 0 ? 'bg-zinc-50/20' : 'bg-white'
                 }`}
             >
               {/* ORDER DETAILS */}
               <div className="col-span-5 pr-4">
-                <p className="font-medium text-white text-sm">{order.title}</p>
-                <p className="text-xs text-white/72 mt-0.5">ID: {order.id} • {order.date}</p>
+                <p className="font-semibold text-zinc-900 text-sm">{order.title}</p>
+                <p className="text-xs text-zinc-500 mt-0.5">ID: {order.id} • {order.date}</p>
               </div>
-
+ 
               {/* SELLER */}
               <div className="col-span-3 flex items-center gap-3 pr-4">
                 <img
                   src={order.sellerAvatar}
                   alt={order.sellerName}
-                  className="w-8 h-8 rounded-full object-cover border border-zinc-700 shrink-0"
+                  className="w-8 h-8 rounded-full object-cover border border-zinc-200 shrink-0"
                 />
-                <span className="text-white text-sm font-medium">{order.sellerName}</span>
+                <span className="text-zinc-800 text-sm font-semibold">{order.sellerName}</span>
               </div>
-
+ 
               {/* AMOUNT */}
               <div className="col-span-2">
-                <span className="text-white font-semibold text-sm">{order.amount}</span>
+                <span className="text-zinc-900 font-bold text-sm">{order.amount}</span>
               </div>
-
+ 
               {/* STATUS */}
               <div className="col-span-1 flex justify-center">
                 <span
-                  className={`px-3 py-1 rounded-full text-[11px] font-semibold whitespace-nowrap border ${order.status === 'In Progress'
-                    ? 'bg-[#3d2a13] text-[#f5a623] border-[#f5a623]/20'
+                  className={`px-3 py-1 rounded-full text-[11px] font-bold whitespace-nowrap border ${order.status === 'In Progress'
+                    ? 'bg-amber-50 text-amber-600 border-amber-200'
                     : order.status === 'Completed'
-                      ? 'bg-[#143422] text-[#2ecc71] border-[#2ecc71]/20'
-                      : 'bg-[#3a1618] text-[#ef4444] border-[#ef4444]/20'
+                      ? 'bg-green-50 text-green-600 border-green-200'
+                      : 'bg-red-50 text-red-600 border-red-200'
                     }`}
                 >
                   {order.status}
                 </span>
               </div>
-
+ 
               {/* ACTION */}
               <div className="col-span-1 flex justify-center">
                 <button
                   onClick={() => onSelectOrder(order)}
-                  className="p-2 text-zinc-400 hover:text-white transition-colors cursor-pointer rounded-lg hover:bg-zinc-700/50"
+                  className="p-2 text-zinc-500 hover:text-zinc-900 transition-colors cursor-pointer rounded-lg hover:bg-zinc-100"
                   aria-label="View Order Details"
                 >
                   <Eye className="w-5 h-5" />

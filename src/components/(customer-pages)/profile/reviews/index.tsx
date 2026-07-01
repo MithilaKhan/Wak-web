@@ -20,7 +20,7 @@ export default function ReviewsPage() {
   return (
     <DashboardCard>
       {/* Page Title */}
-      <h1 className="text-xl md:text-2xl font-medium text-white mb-8">
+      <h1 className="text-xl md:text-2xl font-bold text-zinc-900 mb-8">
         Review & Feedback
       </h1>
 

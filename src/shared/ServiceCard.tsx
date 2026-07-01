@@ -32,7 +32,7 @@ const ServiceCard = ({ id, name, coverImage, category, price, rating, reviewCoun
     return (
         <div
             onClick={handleClick}
-            className="group relative h-full overflow-hidden rounded-2xl bg-linear-to-br from-white/80 to-white/80 backdrop-blur-2xl border border-white/10 shadow-2xl transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+            className="group relative h-full overflow-hidden rounded-2xl bg-white backdrop-blur-2xl border border-white/10 shadow-2xl transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
         >
             {/* Cover Image */}
             <div className="relative w-full h-48 overflow-hidden">

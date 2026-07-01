@@ -61,7 +61,7 @@ export default function ProductInfo({
                         ${price.toLocaleString()}
                     </span>
                     {originalPrice && (
-                        <span className="text-zinc-500 line-through text-xl">
+                        <span className="text-white/70 line-through text-xl">
                             ${originalPrice.toLocaleString()}
                         </span>
                     )}
@@ -81,17 +81,17 @@ export default function ProductInfo({
                         ))}
                     </div>
                     <span className="text-white font-semibold text-sm">{rating}</span>
-                    <span className="text-zinc-500 text-sm">({reviews} reviews)</span>
+                    <span className="text-white/90 text-sm">({reviews} reviews)</span>
                 </div>
 
                 <div className="flex flex-col gap-4 ">
                     {/* Qty row */}
                     <div className="flex items-center gap-4">
-                        <span className="text-white/50 text-sm">Quantity</span>
-                        <div className="flex items-center bg-[#252525] border border-white/8 rounded-xl overflow-hidden">
+                        <span className="text-white text-sm">Quantity</span>
+                        <div className="flex items-center bg-white/10 backdrop-blur-sm border border-white/80 rounded-xl overflow-hidden">
                             <button
                                 onClick={decrement}
-                                className="w-10 h-10 text-white/70 hover:text-white hover:bg-[#FF6700]/20 transition-all font-semibold text-xl cursor-pointer"
+                                className="w-10 h-10 text-white hover:text-white hover:bg-[#FF6700]/20 transition-all font-semibold text-xl cursor-pointer"
                             >
                                 −
                             </button>
@@ -100,7 +100,7 @@ export default function ProductInfo({
                             </span>
                             <button
                                 onClick={increment}
-                                className="w-10 h-10 text-white/70 hover:text-white hover:bg-[#FF6700]/20 transition-all font-semibold text-xl cursor-pointer"
+                                className="w-10 h-10 text-white hover:text-white hover:bg-[#FF6700]/20 transition-all font-semibold text-xl cursor-pointer"
                             >
                                 +
                             </button>
@@ -109,7 +109,7 @@ export default function ProductInfo({
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-3">
-                        <button className="w-full sm:flex-1 flex items-center justify-center gap-2 bg-transparent hover:bg-[#2B2B2B] border-2 border-white/15 hover:border-[#FF6700]/50 text-white font-semibold py-3.5 rounded-xl text-sm transition-all active:scale-95 cursor-pointer">
+                        <button className="w-full sm:flex-1 flex items-center justify-center gap-2 bg-transparent hover:bg-primary border border-white/75  text-white font-semibold py-3.5 rounded-xl text-sm transition-all active:scale-95 cursor-pointer">
                             <ShoppingCart className="w-4 h-4" />
                             Add to Cart
                         </button>
@@ -131,12 +131,12 @@ export default function ProductInfo({
 
             {/* ── About this item ── */}
             <div className="my-4">
-                <h3 className="text-sm font-medium text-white/70   mb-2">
+                <h3 className="text-sm font-medium text-white   mb-2">
                     About this item
                 </h3>
                 <ul className="space-y-2.5">
                     {aboutItems.map((item, idx) => (
-                        <li key={idx} className="flex gap-3 text-sm text-white/70 leading-relaxed font-light">
+                        <li key={idx} className="flex gap-3 text-sm text-white/85 leading-relaxed font-light">
                             <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#FF6700] shrink-0" />
                             {item}
                         </li>
@@ -146,14 +146,14 @@ export default function ProductInfo({
             <div className="border-t border-white/5 pt-4" />
             {/* ── Top Highlights ── */}
             <div className="">
-                <h3 className="text-sm font-medium text-white/70  mb-4">
+                <h3 className="text-sm font-medium text-white  mb-4">
                     Specifications
                 </h3>
                 <div className="grid grid-cols-1 gap-y-3">
                     {highlights?.map(({ label, value }) => (
                         <div key={label} className="flex items-start gap-2 text-sm">
-                            <span className="w-40 text-white/40 shrink-0">{label}</span>
-                            <span className="text-white/80 ">{value}</span>
+                            <span className="w-40 text-white/70 shrink-0">{label}</span>
+                            <span className="text-white/95 ">{value}</span>
                         </div>
                     ))}
                 </div>

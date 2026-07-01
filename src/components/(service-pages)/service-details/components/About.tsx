@@ -19,7 +19,7 @@ export default function About() {
             <h1 className="text-xl font-medium text-white mb-3">{aboutData.title}</h1>
             <div className="space-y-1.5">
                 {aboutData.paragraphs.map((paragraph, index) => (
-                    <p key={index} className="text-gray-300 leading-relaxed text-sm">
+                    <p key={index} className="text-white/80 leading-relaxed text-sm">
                         {paragraph}
                     </p>
                 ))}

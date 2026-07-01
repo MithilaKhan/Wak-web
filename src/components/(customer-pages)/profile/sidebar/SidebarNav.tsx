@@ -47,11 +47,11 @@ export default function SidebarNav({ items }: SidebarNavProps) {
               key={item.href}
               href={item.href}
               className={`
-                group relative flex items-center gap-3 px-4 py-3 rounded-md
-                text-sm font-normal transition-all duration-200
+                group relative flex items-center gap-3 px-4 py-3 rounded-xl
+                text-sm font-semibold transition-all duration-200
                 ${isActive
                   ? "bg-primary text-white shadow-lg shadow-primary/20"
-                  : "text-white/72 bg-[#4f2c1d] cursor-pointer"
+                  : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 bg-transparent cursor-pointer"
                 }`}>
               <Icon className="w-[18px] h-[18px] shrink-0" />
               <span>{item.label}</span>
@@ -63,7 +63,7 @@ export default function SidebarNav({ items }: SidebarNavProps) {
       {/* Logout Button */}
       <button
         onClick={logout}
-        className="mt-auto flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-white hover:text-red-700 hover:bg-red-500/10 transition-all duration-200 cursor-pointer w-full"
+        className="mt-auto flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-zinc-600 hover:text-red-600 hover:bg-red-50 transition-all duration-200 cursor-pointer w-full"
       >
         <LogOut className="w-[18px] h-[18px] shrink-0" />
         <span>Logout</span>

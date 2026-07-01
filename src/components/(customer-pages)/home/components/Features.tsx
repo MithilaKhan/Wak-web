@@ -23,7 +23,7 @@ const features = [
 
 const Features = () => {
     return (
-        <section className="pt-[50px] bg-[#4f2c1d]">
+        <section className="pt-[50px]">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {features.map((feature) => {
@@ -31,7 +31,7 @@ const Features = () => {
                         return (
                             <div
                                 key={feature.id}
-                                className="bg-white/95 p-8 py-12 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 shadow-xl shadow-black/10 "
+                                className="bg-white backdrop-blur-lg p-8 py-12 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 shadow-xl shadow-black/10 "
                             >
                                 {/* Concentric Circular Golden Icon Container */}
                                 <div className="w-20 h-20 rounded-full bg-primary/30 border border-primary/50 flex items-center justify-center mb-6 group-hover:scale-105 transition-all duration-300">

@@ -42,10 +42,10 @@ const HorizontalServiceCard = ({
     return (
         <div
             onClick={handleClick}
-            className="flex gap-4 bg-[#2a2a2a]/20 border border-zinc-800/80 hover:border-[#FF6700]/30 hover:bg-[#2a2a2a]/40 rounded-2xl p-4 transition-all duration-350 hover:-translate-y-0.5 cursor-pointer group"
+            className="flex gap-4 bg-white/5 border border-white/10 hover:border-[#FF6700]/30 hover:bg-white/10 rounded-2xl p-4 transition-all duration-350 hover:-translate-y-0.5 cursor-pointer group"
         >
             {/* Cover Image (Left Side) */}
-            <div className="w-28 h-20 sm:w-32 sm:h-24 rounded-xl overflow-hidden shrink-0 relative border border-zinc-700/20">
+            <div className="w-28 h-20 sm:w-32 sm:h-24 rounded-xl overflow-hidden shrink-0 relative border border-white/10">
                 <img
                     src={coverImage}
                     alt={name}
@@ -56,10 +56,10 @@ const HorizontalServiceCard = ({
             {/* Content (Right Side) */}
             <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
                 <div>
-                    <h4 className="text-white font-semibold text-sm sm:text-base line-clamp-1 group-hover:text-[#FFDDA5] transition-colors">
+                    <h4 className="text-white font-semibold text-sm sm:text-base line-clamp-1 group-hover:text-primary transition-colors">
                         {name}
                     </h4>
-                    <p className="text-[11px] sm:text-xs text-zinc-400 line-clamp-1 mt-1 font-normal leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-white/60 line-clamp-1 mt-1 font-normal leading-relaxed">
                         {description}
                     </p>
                 </div>
@@ -71,7 +71,7 @@ const HorizontalServiceCard = ({
                             alt={name}
                             className="w-5.5 h-5.5 rounded-full object-cover border border-zinc-700/50 shrink-0"
                         />
-                        <span className="text-[10px] bg-zinc-800/80 text-zinc-400 px-2 py-0.5 rounded font-medium truncate">
+                        <span className="text-[10px] bg-primary/80 text-white px-2 py-0.5 rounded font-medium truncate">
                             {category}
                         </span>
                     </div>
@@ -255,7 +255,7 @@ export default function ServicesList() {
                                 <h2 className="text-3xl md:text-4xl font-semibold text-white">
                                     Our Services
                                 </h2>
-                                <p className="text-gray-400 text-sm mt-2">
+                                <p className="text-white/70 text-sm mt-2">
                                     Browse through expert-vetted professionals
                                 </p>
                             </div>
@@ -271,11 +271,10 @@ export default function ServicesList() {
                             <button
                                 key={category.value}
                                 onClick={() => setSelectedCategory(category.value)}
-                                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                                    isActive
-                                        ? 'bg-[#FF6700] text-white shadow-lg shadow-orange-600/10'
-                                        : 'bg-[#2a2a2a]/30 hover:bg-[#2a2a2a]/55 border border-zinc-800/80 text-zinc-300 hover:text-white'
-                                }`}
+                                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${isActive
+                                    ? 'bg-[#FF6700] text-white shadow-lg shadow-orange-600/10'
+                                    : 'bg-white/5 hover:bg-primary/80 border border-white/10 text-white hover:text-white'
+                                    }`}
                             >
                                 {category.name}
                             </button>
