@@ -92,9 +92,24 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    {/* Newsletter in another column */}
+                    {/* Contact Information / Newsletter */}
                     <div className="lg:col-span-4">
-                        <Newsletter />
+                        {/* <Newsletter /> */}
+                        <h3 className="text-white font-semibold mb-8 text-lg">Contact Information</h3>
+                        <ul className="space-y-4 text-sm text-zinc-300">
+                            <li className="flex items-start gap-3">
+                                <span className="font-semibold text-white">Phone:</span>
+                                <span>+8801611112222</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="font-semibold text-white">Email:</span>
+                                <span>support@gmail.com</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="font-semibold text-white">Address:</span>
+                                <span>Dhaka, Bangladesh</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 

@@ -4,21 +4,53 @@
 import { useState } from "react";
 import { Eye, EyeOff, Check } from "lucide-react";
 import { Input } from "@/ui/input";
+import { toast } from "sonner";
+import { myFetch } from "../../../../../helpers/myFetch";
 
 export default function DeleteAccount() {
-  const [selectedReason, setSelectedReason] = useState<string>("");
+  const [selectedReasonId, setSelectedReasonId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const reasons = [
     { id: "duplicate", label: "I have a duplicate account" },
-    { id: "no-longer", label: "I no longer want to use Star Tech" },
+    { id: "no-longer", label: "I no longer want to use this platform" },
     { id: "others", label: "Others" },
   ];
 
-  const handleDelete = () => {
-    console.log("Account deletion requested with reason:", selectedReason);
-    alert("Account deletion request submitted successfully.");
+  const handleDelete = async () => {
+    if (!selectedReasonId || !password.trim()) {
+      toast.error("Please select a reason and enter your password.");
+      return;
+    }
+
+    const selectedReasonLabel = reasons.find((r) => r.id === selectedReasonId)?.label || "Others";
+
+    setLoading(true);
+    try {
+      const res = await myFetch("/users", {
+        method: "DELETE",
+        body: {
+          password: password,
+          reason: selectedReasonLabel
+        }
+      });
+
+      if (res.success) {
+        toast.success(res.message || "Account deletion request submitted successfully.");
+        // Clear the form
+        setSelectedReasonId("");
+        setPassword("");
+      } else {
+        toast.error(res.message || res.error || "Failed to submit account deletion request.");
+      }
+    } catch (error) {
+      console.error("Account deletion error:", error);
+      toast.error("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,11 +73,11 @@ export default function DeleteAccount() {
         <h3 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Reason for Deletion</h3>
         <div className="space-y-3.5">
           {reasons.map((reason) => {
-            const isSelected = selectedReason === reason.id;
+            const isSelected = selectedReasonId === reason.id;
             return (
               <div
                 key={reason.id}
-                onClick={() => setSelectedReason(reason.id)}
+                onClick={() => setSelectedReasonId(reason.id)}
                 className="flex items-center gap-3.5 cursor-pointer group"
               >
                 <div
@@ -95,20 +127,21 @@ export default function DeleteAccount() {
         <button
           type="button"
           onClick={() => {
-            setSelectedReason("");
+            setSelectedReasonId("");
             setPassword("");
           }}
-          className="px-8 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 text-sm font-semibold rounded-xl transition-colors cursor-pointer"
+          disabled={loading}
+          className="px-8 py-2.5 bg-red-50 hover:bg-red-100 disabled:opacity-50 text-red-600 text-sm font-semibold rounded-xl transition-colors cursor-pointer"
         >
           Cancel
         </button>
         <button
           type="button"
-          disabled={!selectedReason || !password.trim()}
+          disabled={!selectedReasonId || !password.trim() || loading}
           onClick={handleDelete}
           className="px-8 py-2.5 bg-primary hover:bg-orange-500 disabled:opacity-50 disabled:hover:bg-primary text-white text-sm font-bold rounded-xl transition-colors cursor-pointer shadow-md shadow-orange-500/10"
         >
-          Confirm
+          {loading ? "Confirming..." : "Confirm"}
         </button>
       </div>
     </div>

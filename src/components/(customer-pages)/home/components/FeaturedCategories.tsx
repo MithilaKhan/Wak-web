@@ -1,34 +1,50 @@
 "use client"
 
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Grid } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/grid';
+import { myFetch } from '../../../../../helpers/myFetch';
+import { resolveImageUrl } from '../../../../../helpers/resolveImageUrl';
 
-const categories = [
-    { id: 1, name: "Make Up", image: "/dummy-cat1.png" },
-    { id: 2, name: "Mobile Phone", image: "/dummy-cat2.png" },
-    { id: 3, name: "Airpods", image: "/dummy-cat3.png" },
-    { id: 4, name: "Laptop", image: "/dummy-cat4.png" },
-    { id: 5, name: "Travel essentials", image: "/dummy-cat5.png" }, // Black bg
-    { id: 6, name: "Laptop", image: "/dummy-cat6.png" }, // Dark bg
-    { id: 7, name: "Make Up", image: "/dummy-cat1.png" },
-    { id: 8, name: "Sunglass", image: "/dummy-cat3.png" },
-    { id: 10, name: "Apple Watch", image: "/dummy-cat3.png" }, // Black bg
-    { id: 11, name: "Travel essentials", image: "/dummy-cat5.png" },
-    { id: 12, name: "Make Up", image: "/dummy-cat1.png" }, // Black bg
-    { id: 13, name: "Make Up", image: "/dummy-cat1.png" }, // Black bg
-    { id: 14, name: "Mobile Phone", image: "/dummy-cat2.png" }, // Black bg
-    { id: 15, name: "Gaming", image: "/dummy-cat4.png" },
-    { id: 16, name: "Mobile Phone", image: "/dummy-cat2.png" },
-];
+interface Category {
+    _id: string;
+    name: string;
+    slug: string;
+    image: string;
+    type: string;
+    isFeatured?: boolean;
+}
 
 const FeaturedCategories = () => {
+    const [featuredCategories, setFeaturedCategories] = useState<Category[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                // Fetch all categories
+                const res = await myFetch("/categories/active");
+                if (res?.data) {
+                    // Filter to only those that are featured
+                    const featured = res.data.filter((c: Category) => c.isFeatured === true);
+                    setFeaturedCategories(featured);
+                }
+            } catch (error) {
+                console.error("Failed to fetch featured categories", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCategories();
+    }, []);
+
     return (
         <section className="py-[50px] bg-[#4f2c1d]">
             <div className="container mx-auto px-4">
@@ -36,8 +52,8 @@ const FeaturedCategories = () => {
                 <div className="flex justify-between items-center mb-10">
                     <h2 className="title mb-0!">Featured Categories</h2>
 
-                    <div className="flex gap-4">
-                        {/* Custom prev/next navigation styled for disabled state using Swiper classes */}
+                    <div className="flex gap-4 flex-1 justify-end">
+                        {/* Custom prev/next navigation */}
                         <button
                             className="category-prev w-10 h-10 rounded-full bg-[#d4a373] flex items-center justify-center hover:bg-[#d4a373]/90 transition-all text-zinc-900 disabled:opacity-40 disabled:cursor-not-allowed [&.swiper-button-disabled]:!bg-zinc-800 [&.swiper-button-disabled]:!text-zinc-600 [&.swiper-button-disabled]:!opacity-40 [&.swiper-button-disabled]:pointer-events-none cursor-pointer"
                         >
@@ -52,60 +68,63 @@ const FeaturedCategories = () => {
                 </div>
 
                 <div className="categories-slider">
-                    <Swiper
-                        modules={[Navigation, Grid]}
-                        navigation={{
-                            prevEl: '.category-prev',
-                            nextEl: '.category-next',
-                        }}
-                        slidesPerView={5}
-                        slidesPerGroup={5}
-                        grid={{
-                            rows: 3,
-                            fill: 'row'
-                        }}
-                        spaceBetween={30}
-                        breakpoints={{
-                            320: { slidesPerView: 2, slidesPerGroup: 2, grid: { rows: 2 } },
-                            768: { slidesPerView: 3, slidesPerGroup: 3, grid: { rows: 3 } },
-                            1024: { slidesPerView: 5, slidesPerGroup: 5, grid: { rows: 3 } }
-                        }}
-                        className="h-full w-full"
-                    >
-                        {categories.map((category) => (
-                            <SwiperSlide key={category.id} className="group cursor-pointer flex justify-center items-center">
-                                {/* Fluid 200x143 card wrapper */}
-                                <div className="w-full max-w-[200px] h-[143px] bg-white/5 border border-white/20 rounded-xl flex flex-col items-center justify-center ">
-                                    <div className="relative min-w-[144px] min-h-20 flex items-center justify-center mb-2">
-                                        <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-500">
+                    {loading ? (
+                        <div className="w-full py-20 flex justify-center items-center">
+                            <span className="text-zinc-400">Loading categories...</span>
+                        </div>
+                    ) : featuredCategories.length > 0 ? (
+                        <Swiper
+                            modules={[Navigation]}
+                            navigation={{
+                                prevEl: '.category-prev',
+                                nextEl: '.category-next',
+                            }}
+                            slidesPerView={4}
+                            spaceBetween={24}
+                            breakpoints={{
+                                320: { slidesPerView: 1.2, spaceBetween: 16 },
+                                640: { slidesPerView: 2.2, spaceBetween: 20 },
+                                768: { slidesPerView: 3, spaceBetween: 24 },
+                                1024: { slidesPerView: 4, spaceBetween: 24 },
+                                1280: { slidesPerView: 5, spaceBetween: 24 }
+                            }}
+                            className="w-full"
+                        >
+                            {featuredCategories.map((category) => (
+                                <SwiperSlide key={category._id} className="group cursor-pointer">
+                                    <div className="relative w-full h-[200px] rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:-translate-y-1 group-hover:shadow-xl">
+                                        <div className="absolute inset-0 z-0">
                                             <Image
-                                                src={category.image}
+                                                src={resolveImageUrl(category.image) || ""}
                                                 alt={category.name}
                                                 fill
-                                                className="object-contain p-0.5"
+                                                unoptimized={true}
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
                                             />
                                         </div>
+                                        {/* Dark gradient overlay */}
+                                        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                                        
+                                        {/* Text content at bottom left */}
+                                        <div className="absolute bottom-5 left-5 z-20 flex flex-col">
+                                            <span className="text-white font-bold text-lg leading-tight mb-1">
+                                                {category.name}
+                                            </span>
+                                            <span className="text-zinc-300 text-xs font-semibold tracking-wider uppercase group-hover:text-white transition-colors">
+                                                EXPLORE {category.type}S
+                                            </span>
+                                        </div>
                                     </div>
-                                    <span className="text-white font-medium text-sm text-center line-clamp-1">
-                                        {category.name}
-                                    </span>
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    ) : (
+                        <div className="w-full py-20 flex justify-center items-center">
+                            <span className="text-zinc-400">No featured categories found.</span>
+                        </div>
+                    )}
                 </div>
             </div>
-
-            {/* Custom Grid Styles for Swiper */}
-            <style jsx global>{`
-                .categories-slider .swiper-grid-column .swiper-wrapper {
-                    flex-direction: row !important;
-                }
-                .categories-slider .swiper-slide {
-                    margin-top: 0 !important;
-                    margin-bottom: 30px !important;
-                }
-            `}</style>
         </section>
     );
 };

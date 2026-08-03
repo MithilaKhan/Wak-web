@@ -3,52 +3,46 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
     LayoutGrid,
     ChevronDown,
     ChevronRight,
-    Laptop,
-    ShoppingBag,
-    Shirt,
-    Home,
-    Pill,
-    Dumbbell,
-    Baby,
-    Apple,
-    Heart,
-    Code,
-    Palette,
-    Megaphone,
-    Layers,
-    PenTool,
-    TrendingUp
 } from 'lucide-react';
+import { myFetch } from '../../helpers/myFetch';
+import { resolveImageUrl } from '../../helpers/resolveImageUrl';
 
-const productCategories = [
-    { name: "Electronics", href: "/shop?category=Electronics", icon: Laptop },
-    { name: "Woman's Fashion", href: "/shop?category=Woman's Fashion", icon: ShoppingBag },
-    { name: "Men's Fashion", href: "/shop?category=Men's Fashion", icon: Shirt },
-    { name: "Home & Lifestyle", href: "/shop?category=Home & Lifestyle", icon: Home },
-    { name: "Medicine", href: "/shop?category=Medicine", icon: Pill },
-    { name: "Sports & Outdoor", href: "/shop?category=Sports & Outdoor", icon: Dumbbell },
-    { name: "Baby's & Toys", href: "/shop?category=Baby's & Toys", icon: Baby },
-    { name: "Groceries & Pets", href: "/shop?category=Groceries & Pets", icon: Apple },
-    { name: "Health & Beauty", href: "/shop?category=Health & Beauty", icon: Heart }
-];
-
-const serviceCategories = [
-    { name: "Web Development", href: "/services?category=Development", icon: Code },
-    { name: "Graphic Design", href: "/services?category=Designer", icon: Palette },
-    { name: "Digital Marketing", href: "/services?category=Marketing", icon: Megaphone },
-    { name: "UI/UX Design", href: "/services?category=UIUX Design", icon: Layers },
-    { name: "Copy writing", href: "/services?category=Copy writing", icon: PenTool },
-    { name: "SEO & Marketing", href: "/services?category=SEO Marketing", icon: TrendingUp }
-];
+interface Category {
+    _id: string;
+    name: string;
+    slug: string;
+    image: string;
+    type: string;
+}
 
 export default function BrowseCategoriesButton() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<'products' | 'services'>('products');
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const [productCategories, setProductCategories] = useState<Category[]>([]);
+    const [serviceCategories, setServiceCategories] = useState<Category[]>([]);
+
+    console.log("product", productCategories, productCategories.length > 0 ? resolveImageUrl(productCategories[0]?.image) : "no image yet");
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const prodRes = await myFetch("/categories/active?type=product");
+                if (prodRes?.data) setProductCategories(prodRes.data);
+
+                const servRes = await myFetch("/categories/active?type=service");
+                if (servRes?.data) setServiceCategories(servRes.data);
+            } catch (error) {
+                console.error("Failed to fetch categories", error);
+            }
+        };
+        fetchCategories();
+    }, []);
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -87,11 +81,10 @@ export default function BrowseCategoriesButton() {
                         <button
                             onMouseEnter={() => setActiveTab('products')}
                             onClick={() => setActiveTab('products')}
-                            className={`flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 cursor-pointer text-left group ${
-                                activeTab === 'products'
-                                    ? 'bg-[#FF6700] text-white shadow-md shadow-orange-600/20'
-                                    : 'text-white hover:text-white hover:bg-white/5'
-                            }`}
+                            className={`flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 cursor-pointer text-left group ${activeTab === 'products'
+                                ? 'bg-[#FF6700] text-white shadow-md shadow-orange-600/20'
+                                : 'text-white hover:text-white hover:bg-white/5'
+                                }`}
                         >
                             <span>Products</span>
                             <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${activeTab === 'products' ? 'translate-x-0.5' : 'opacity-40 group-hover:opacity-100'}`} />
@@ -99,11 +92,10 @@ export default function BrowseCategoriesButton() {
                         <button
                             onMouseEnter={() => setActiveTab('services')}
                             onClick={() => setActiveTab('services')}
-                            className={`flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 cursor-pointer text-left group ${
-                                activeTab === 'services'
-                                    ? 'bg-[#FF6700] text-white shadow-md shadow-orange-600/20'
-                                    : 'text-white hover:text-white hover:bg-white/5'
-                            }`}
+                            className={`flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 cursor-pointer text-left group ${activeTab === 'services'
+                                ? 'bg-[#FF6700] text-white shadow-md shadow-orange-600/20'
+                                : 'text-white hover:text-white hover:bg-white/5'
+                                }`}
                         >
                             <span>Services</span>
                             <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${activeTab === 'services' ? 'translate-x-0.5' : 'opacity-40 group-hover:opacity-100'}`} />
@@ -114,19 +106,34 @@ export default function BrowseCategoriesButton() {
                     <div className="flex-1 p-3 bg-[#4f2c1d] max-h-[360px] overflow-y-auto animate-in fade-in duration-200">
                         <div className="grid grid-cols-1 gap-1">
                             {(activeTab === 'products' ? productCategories : serviceCategories).map((category) => {
-                                const Icon = category.icon;
+                                const href = activeTab === 'products'
+                                    ? `/shop?category=${category.name}`
+                                    : `/services?category=${category.name}`;
                                 return (
                                     <Link
-                                        key={category.name}
-                                        href={category.href}
+                                        key={category._id}
+                                        href={href}
                                         onClick={() => setIsOpen(false)}
                                         className="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-300 hover:text-primary hover:bg-white/5 rounded-lg transition-colors font-medium group"
                                     >
-                                        <Icon className="w-4.5 h-4.5 text-white group-hover:text-[#FF6700] transition-colors" />
+                                        <Image
+                                            src={resolveImageUrl(category.image) || ""}
+                                            alt={category.name}
+                                            width={18}
+                                            height={18}
+                                            unoptimized={true}
+                                            className="w-[18px] h-[18px] object-cover rounded-full"
+                                        />
                                         <span>{category.name}</span>
                                     </Link>
                                 );
                             })}
+
+                            {(activeTab === 'products' ? productCategories : serviceCategories).length === 0 && (
+                                <div className="px-4 py-3 text-sm text-zinc-400">
+                                    Loading categories...
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
