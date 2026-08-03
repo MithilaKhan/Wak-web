@@ -5,9 +5,9 @@ import ServicesList from "./components/ServiceList";
 const Services = () => {
     return (
         <main className="w-full">
-            <Banner />
+            {/* <Banner />  */}
             <Suspense fallback={
-                <div className="py-20 text-center text-zinc-500 font-medium">
+                <div className="py-10 text-center text-zinc-500 font-medium">
                     Loading services...
                 </div>
             }>

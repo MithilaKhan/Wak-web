@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import "./globals.css";
 import CustomerNavbar from "@/shared/Navbar";
 import Footer from "@/shared/Footer";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default async function RootLayout({
     >
 
       <body className="min-h-full flex flex-col mx-auto font-sans">
+        <Toaster richColors position="top-center" />
         <CustomerNavbar userMode={userMode} />
         <div className="">
           {children}

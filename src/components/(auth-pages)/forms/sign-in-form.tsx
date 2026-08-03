@@ -1,11 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
 import { Checkbox } from "@/ui/checkbox";
 import { useAuth } from "@/hooks/use-auth";
 import { GoogleIcon, AppleIcon } from "@/components/(auth-pages)/components/brands";
+import { myFetch } from "../../../../helpers/myFetch";
+import { toast } from "sonner";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 interface SignInFormProps {
   onSwitch: (view: "signup" | "forgot-password") => void;
@@ -13,10 +18,49 @@ interface SignInFormProps {
 
 export function SignInForm({ onSwitch }: SignInFormProps) {
   const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    if (!email || !password) {
+      toast.error("Please enter email and password", { id: "login" });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await myFetch("/auth/login", {
+        method: "POST",
+        body: { email, password },
+      });
+
+      if (res?.success) {
+        toast.success(res?.message || "Login successfully", { id: "login" });
+        if (res?.data?.accessToken) {
+          Cookies.set("accessToken", res.data.accessToken);
+        }
+        login();
+        router.push("/home");
+      } else {
+        if (res?.error && Array.isArray(res.error)) {
+          res.error.forEach((err: { message: string }) => {
+            toast.error(err.message, { id: "login" });
+          });
+        } else {
+          toast.error(res?.message || "Something went wrong!", { id: "login" });
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Network error", { id: "login" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -30,6 +74,7 @@ export function SignInForm({ onSwitch }: SignInFormProps) {
         <div className="flex flex-col gap-2">
           <Label htmlFor="signin-email" className="text-zinc-700 text-sm font-medium">Email</Label>
           <Input
+            name="email"
             id="signin-email"
             type="email"
             placeholder="Enter email address"
@@ -41,6 +86,7 @@ export function SignInForm({ onSwitch }: SignInFormProps) {
           <Label htmlFor="signin-password" title="Password" className="text-zinc-700 text-sm font-medium">Password</Label>
           <div className="relative">
             <Input
+              name="password"
               id="signin-password"
               type="password"
               placeholder="********"
@@ -63,8 +109,8 @@ export function SignInForm({ onSwitch }: SignInFormProps) {
           </button>
         </div>
  
-        <Button type="submit" className="w-full bg-primary hover:bg-orange-500 text-white h-14 text-lg font-bold rounded-xl mt-4 shadow-lg shadow-orange-500/20 cursor-pointer">
-          Sign In
+        <Button type="submit" disabled={loading} className="w-full bg-primary hover:bg-orange-500 text-white h-14 text-lg font-bold rounded-xl mt-4 shadow-lg shadow-orange-500/20 cursor-pointer">
+          {loading ? "Signing In..." : "Sign In"}
         </Button>
       </form>
  

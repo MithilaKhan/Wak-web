@@ -1,4 +1,6 @@
 "use client";
+import { useState, useRef } from "react";
+import { Camera } from "lucide-react";
 
 import { Input } from "@/ui/input";
 import {
@@ -15,8 +17,9 @@ interface PersonalInfoFormProps {
     email: string;
     phone: string;
     country: string;
+    profileImage?: string;
   };
-  onSave: (data: PersonalInfoFormProps["userData"]) => void;
+  onSave: (data: any) => void;
   onCancel: () => void;
 }
 
@@ -40,19 +43,57 @@ export default function PersonalInfoForm({
   onSave,
   onCancel,
 }: PersonalInfoFormProps) {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    onSave({
+    const data: any = {
       username: formData.get("username") as string,
       email: formData.get("email") as string,
       phone: formData.get("phone") as string,
       country: formData.get("country") as string,
-    });
+    };
+
+    const file = formData.get("profileImage") as File;
+    if (file && file.size > 0) {
+      data.profileImageFile = file;
+    }
+
+    onSave(data);
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <div className="mb-8 flex justify-center">
+        <div
+          className="w-24 h-24 rounded-full overflow-hidden border-2 border-dashed border-zinc-300 flex items-center justify-center cursor-pointer hover:border-primary transition-colors relative group"
+          onClick={() => fileInputRef.current?.click()}
+        >
+          {previewUrl || userData.profileImage ? (
+            <>
+              <img src={previewUrl || userData.profileImage} className="w-full h-full object-fit" alt="Preview" />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <Camera className="text-white w-6 h-6" />
+              </div>
+            </>
+          ) : (
+            <div className="text-zinc-400 text-sm flex flex-col items-center">
+              <Camera className="w-6 h-6 mb-1" />
+              Upload
+            </div>
+          )}
+          <input type="file" ref={fileInputRef} name="profileImage" accept="image/*" className="hidden" onChange={handleImageChange} />
+        </div>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* User Name */}
         <div className="space-y-2">
@@ -70,7 +111,7 @@ export default function PersonalInfoForm({
             className="h-12 bg-zinc-50 border border-zinc-200 text-zinc-900 mt-2 rounded-xl placeholder:text-zinc-400 focus:bg-white focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:border-primary"
           />
         </div>
- 
+
         {/* Email */}
         <div className="space-y-2">
           <label
@@ -88,7 +129,7 @@ export default function PersonalInfoForm({
             className="h-12 bg-zinc-50 border border-zinc-200 text-zinc-900 mt-2 rounded-xl placeholder:text-zinc-400 focus:bg-white focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:border-primary"
           />
         </div>
- 
+
         {/* Contact Number */}
         <div className="space-y-2">
           <label
@@ -105,7 +146,7 @@ export default function PersonalInfoForm({
             className="h-12 bg-zinc-50 border border-zinc-200 text-zinc-900 mt-2 rounded-xl placeholder:text-zinc-400 focus:bg-white focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:border-primary"
           />
         </div>
- 
+
         {/* Choose Country */}
         <div className="space-y-2">
           <label className="text-sm font-semibold text-zinc-700">
@@ -129,7 +170,7 @@ export default function PersonalInfoForm({
           </Select>
         </div>
       </div>
- 
+
       {/* Actions */}
       <div className="flex items-center justify-end gap-4 mt-10">
         <button

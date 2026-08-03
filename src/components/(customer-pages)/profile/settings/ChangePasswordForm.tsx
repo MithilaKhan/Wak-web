@@ -1,18 +1,60 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Input } from "@/ui/input";
+import { myFetch } from "../../../../../helpers/myFetch";
+import { toast } from "sonner";
 
 export default function ChangePasswordForm() {
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle password change
-    console.log("Password change submitted");
+    
+    const formData = new FormData(e.currentTarget);
+    const currentPassword = formData.get("currentPassword") as string;
+    const newPassword = formData.get("newPassword") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      toast.error("Please fill in all password fields.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      toast.error("New password and confirm password do not match.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await myFetch("/auth/change-password", {
+        method: "POST",
+        body: { currentPassword, newPassword, confirmPassword },
+      });
+
+      if (res?.success) {
+        toast.success(res?.message || "Your password has been successfully changed");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        if (res?.error && Array.isArray(res.error)) {
+          res.error.forEach((err: { message: string }) => {
+            toast.error(err.message);
+          });
+        } else {
+          toast.error(res?.message || "Failed to change password.");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred while changing the password.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -117,9 +159,10 @@ export default function ChangePasswordForm() {
         </button>
         <button
           type="submit"
-          className="px-8 py-3 bg-primary hover:bg-orange-500 text-white text-sm font-bold rounded-xl transition-colors cursor-pointer shadow-md shadow-orange-500/10"
+          disabled={loading}
+          className="px-8 py-3 bg-primary hover:bg-orange-500 text-white text-sm font-bold rounded-xl transition-colors cursor-pointer shadow-md shadow-orange-500/10 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          Save
+          {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Save"}
         </button>
       </div>
     </form>
