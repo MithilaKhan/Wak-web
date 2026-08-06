@@ -62,6 +62,7 @@ const ProductCard = ({ product, bgColor }: { product: ProductCardProps, bgColor?
                         alt={name}
                         fill
                         className="object-contain"
+                        unoptimized={true}
                     />
                 </div>
             </div>

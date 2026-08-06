@@ -2,38 +2,15 @@
 
 import Image from 'next/image';
 import { Star } from 'lucide-react';
+import { resolveImageUrl } from '../../../../../helpers/resolveImageUrl';
 
-interface ServiceHeader {
-    id: string;
-    title: string;
-    professional: {
-        name: string;
-        badge: string;
-        image: string;
-    };
-    rating: {
-        stars: number;
-        reviews: number;
-    };
-    heroImage: string;
-}
 
-const headerData: ServiceHeader = {
-    id: '1',
-    title: 'Full-Stack Development',
-    professional: {
-        name: 'Harry Thomas Wilson',
-        badge: 'TOP RATER SELLER',
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop'
-    },
-    rating: {
-        stars: 4.4,
-        reviews: 57
-    },
-    heroImage: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop'
-};
+export default function Header({ service }: { service: any }) {
+    if (!service) return null;
 
-export default function Header() {
+    const avatarUrl = resolveImageUrl(service.creator?.profileImage) || `https://ui-avatars.com/api/?name=${encodeURIComponent(service.creator?.name || 'User')}&background=random`;
+    const heroImageUrl = resolveImageUrl(service.image) || "/placeholder.jpg";
+
     return (
         <div className="">
             <div className="container mx-auto px-4 ">
@@ -41,46 +18,45 @@ export default function Header() {
                     {/* Left Content */}
                     <div>
                         <h1 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-                            {headerData.title}
+                            {service.name}
                         </h1>
 
                         {/* Professional Info */}
-                        <div className="flex items-center  gap-4  pb-2 ">
+                        <div className="flex items-center gap-4 pb-2">
                             <div className='flex items-center gap-4 border-e-2 border-white/50 pe-6'>
                                 <Image
-                                    src={headerData.professional.image}
-                                    alt={headerData.professional.name}
+                                    src={avatarUrl}
+                                    alt={service.creator?.name || "Professional"}
                                     width={50}
                                     height={50}
-                                    className="rounded-full"
+                                    className="rounded-full object-cover"
+                                    unoptimized={true}
                                 />
                                 <div className="flex-1 space-y-1.5">
-                                    <h3 className="text-white font-semibold text-lg">{headerData.professional.name}</h3>
-                                    <p className="text-xs text-orange-400 font-normal">{headerData.professional.badge}</p>
+                                    <h3 className="text-white font-semibold text-lg">{service.creator?.name}</h3>
+                                    <p className="text-xs text-orange-400 font-normal">TOP RATED SELLER</p>
                                 </div>
                             </div>
 
                             <div className="flex items-center gap-2 text-sm">
                                 <div className="flex items-center">
                                     <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-                                    <span className="text-white font-semibold ml-1">{headerData.rating.stars}</span>
+                                    <span className="text-white font-semibold ml-1">{service.averageRating || service.ratingAverage || 0}</span>
                                 </div>
-                                <span className="text-white/70">({headerData.rating.reviews} REVIEWS)</span>
+                                <span className="text-white/70">({service.ratingCount || 0} REVIEWS)</span>
                             </div>
 
                         </div>
-
-                        {/* Rating */}
-
                     </div>
 
                     {/* Right Hero Image */}
                     <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden">
                         <Image
-                            src={headerData.heroImage}
-                            alt={headerData.title}
+                            src={heroImageUrl}
+                            alt={service.name}
                             fill
                             className="object-cover"
+                            unoptimized={true}
                             priority
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>

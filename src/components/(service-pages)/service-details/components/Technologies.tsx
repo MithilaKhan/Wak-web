@@ -1,37 +1,16 @@
 'use client';
 
-interface TechCategory {
-    label: string;
-    techs: string[];
-}
+export default function Technologies({ technologies }: { technologies: string[] }) {
+    if (!technologies || technologies.length === 0) return null;
 
-const technologiesData: TechCategory[] = [
-    {
-        label: 'Frontend',
-        techs: ['HTML', 'CSS', 'JavaScript', 'React JS', 'Next JS', 'Tailwind CSS', 'Bootstrap', 'Material UI']
-    },
-    {
-        label: 'Backend',
-        techs: ['PHP Laravel', 'Node JS', 'Express JS']
-    },
-    {
-        label: 'Databases',
-        techs: ['MySQL', 'MongoDB', 'PostgreSQL']
-    }
-];
-
-export default function Technologies() {
     return (
         <section>
             <h2 className="text-xl font-medium text-white mb-3">Technologies We Specialize In</h2>
-            <div className="space-y-1.5">
-                {technologiesData.map((category, index) => (
-                    <div key={index}>
-                        <h3 className="text-white/80 font-normal text-sm">
-                            <span className="text-primary font-medium">{category.label}:</span>{' '}
-                            {category.techs.join(', ')}
-                        </h3>
-                    </div>
+            <div className="space-y-1.5 flex flex-wrap gap-2">
+                {technologies.map((tech, index) => (
+                    <span key={index} className="px-3 py-1 bg-white/10 rounded-full text-white/80 font-normal text-sm border border-white/5">
+                        {tech}
+                    </span>
                 ))}
             </div>
         </section>

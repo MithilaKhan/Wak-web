@@ -38,11 +38,9 @@ export default function CartItemRow({
                 <div className="flex items-center gap-4 w-full sm:w-auto flex-1">
                     {/* Product Image */}
                     <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg bg-zinc-50 border border-zinc-100 shrink-0 overflow-hidden flex items-center justify-center">
-                        <Image
+                        <img
                             src={item.image}
                             alt={item.name}
-                            width={80}
-                            height={80}
                             className="w-full h-full object-contain p-2 sm:p-4"
                         />
                     </div>

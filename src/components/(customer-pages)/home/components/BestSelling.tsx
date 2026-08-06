@@ -1,70 +1,38 @@
 "use client"
 
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { ArrowRight } from 'lucide-react';
 import ProductCard from '@/shared/ProductCard';
+import { myFetch } from '../../../../../helpers/myFetch';
+import { resolveImageUrl } from '../../../../../helpers/resolveImageUrl';
 
 // Import Swiper styles
 import 'swiper/css';
 import { useRouter } from 'next/navigation';
 
-const products = [
-    {
-        id: 1,
-        name: "RGB liquid CPU Cooler",
-        image: "/product1.png",
-        currentPrice: 120,
-        originalPrice: 180,
-        discount: 40,
-        rating: 5,
-        reviews: 88
-    },
-    {
-        id: 2,
-        name: "Jr. Zoom Soccer Cleats",
-        image: "/product2.png",
-        currentPrice: 1169,
-        originalPrice: 1899,
-        discount: 35,
-        rating: 5,
-        reviews: 88
-    },
-    {
-        id: 3,
-        name: "Small BookSelf",
-        image: "/product3.png",
-        currentPrice: 520,
-        originalPrice: 580,
-        discount: 10,
-        rating: 5,
-        reviews: 88
-    },
-    {
-        id: 4,
-        name: "Gucci duffle bag",
-        image: "/product4.png",
-        currentPrice: 420,
-        originalPrice: 580,
-        discount: 24,
-        rating: 4.5,
-        reviews: 88
-    },
-    {
-        id: 5,
-        name: "Gaming Chair",
-        image: "/product1.png",
-        currentPrice: 320,
-        originalPrice: 400,
-        discount: 20,
-        rating: 5,
-        reviews: 95
-    }
-];
-
-
 const BestSelling = () => {
     const router = useRouter();
+    const [products, setProducts] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchBestSelling = async () => {
+            try {
+                const res = await myFetch('/products/best-selling');
+                if (res?.data) {
+                    setProducts(res.data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch best selling products:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBestSelling();
+    }, []);
 
     const handleClick = () => {
         const cookies = document.cookie;
@@ -77,6 +45,7 @@ const BestSelling = () => {
         router.push(`/shop`);
         router.refresh();
     };
+
     return (
         <section className="py-[50px] bg-[#4f2c1d]">
             <div className="container mx-auto px-4">
@@ -86,9 +55,9 @@ const BestSelling = () => {
                         <div className="w-5 h-10 bg-primary rounded-xs"></div>
                         <span className="text-white font-normal text-sm">This Month</span>
                     </div>
-                    <div className="flex justify-between items-end" onClick={handleClick}>
+                    <div className="flex justify-between items-end">
                         <h2 className="title mb-0!">Best Selling Products</h2>
-                        <button className="flex items-center gap-2  text-[#FFDDA5] px-6 py-3 rounded-md font-medium hover:underline underline-offset-4 transition-all group ">
+                        <button className="flex items-center gap-2  text-[#FFDDA5] px-6 py-3 rounded-md font-medium hover:underline underline-offset-4 transition-all group cursor-pointer" onClick={handleClick}>
                             View All
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </button>
@@ -97,25 +66,40 @@ const BestSelling = () => {
 
                 {/* Slider */}
                 <div className="products-slider">
-                    <Swiper
-                        modules={[Autoplay]}
-                        spaceBetween={30}
-                        slidesPerView={4}
-                        autoplay={{ delay: 4000 }}
-                        breakpoints={{
-                            320: { slidesPerView: 1.2, spaceBetween: 20 },
-                            640: { slidesPerView: 2.2, spaceBetween: 20 },
-                            1024: { slidesPerView: 3, spaceBetween: 30 },
-                            1280: { slidesPerView: 4, spaceBetween: 30 }
-                        }}
-                        className="w-full"
-                    >
-                        {products.map((product) => (
-                            <SwiperSlide key={product.id}>
-                                <ProductCard product={product} />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                    {loading ? (
+                        <div className="flex justify-center items-center py-12 text-[#FFDDA5]">Loading...</div>
+                    ) : products.length > 0 ? (
+                        <Swiper
+                            modules={[Autoplay]}
+                            spaceBetween={30}
+                            slidesPerView={4}
+                            autoplay={{ delay: 4000 }}
+                            breakpoints={{
+                                320: { slidesPerView: 1.2, spaceBetween: 20 },
+                                640: { slidesPerView: 2.2, spaceBetween: 20 },
+                                1024: { slidesPerView: 3, spaceBetween: 30 },
+                                1280: { slidesPerView: 4, spaceBetween: 30 }
+                            }}
+                            className="w-full"
+                        >
+                            {products.map((product) => (
+                                <SwiperSlide key={product._id}>
+                                    <ProductCard product={{
+                                        id: product.slug || (product._id as any),
+                                        name: product.name,
+                                        image: resolveImageUrl(product.images?.[0]) || "/placeholder.jpg",
+                                        currentPrice: product.discountPrice || product.price,
+                                        originalPrice: product.price,
+                                        discount: product.discountPrice ? Math.round(((product.price - product.discountPrice) / product.price) * 100) : 0,
+                                        rating: product.ratingAverage || 0,
+                                        reviews: product.ratingCount || 0
+                                    }} />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    ) : (
+                        <div className="text-center text-white/50 py-10">No best selling products found.</div>
+                    )}
                 </div>
             </div>
         </section>

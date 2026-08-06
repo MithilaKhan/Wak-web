@@ -42,6 +42,7 @@ export default function ProductGallery({ images, name }: ProductGalleryProps) {
                             alt={`${name} view ${idx + 1}`}
                             fill
                             className="object-contain p-2"
+                            unoptimized={true}
                         />
                     </button>
                 ))}
@@ -78,6 +79,7 @@ export default function ProductGallery({ images, name }: ProductGalleryProps) {
                             fill
                             className="object-contain p-8 drop-shadow-2xl"
                             priority
+                            unoptimized={true}
                         />
                     </div>
                 </div>

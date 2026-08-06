@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Star } from 'lucide-react';
+import { myFetch } from '../../../../../helpers/myFetch';
+import { resolveImageUrl } from '../../../../../helpers/resolveImageUrl';
 
 const HorizontalServiceCard = ({
     id,
@@ -15,7 +17,7 @@ const HorizontalServiceCard = ({
     price,
     coverImage
 }: {
-    id: number;
+    id: string | number;
     name: string;
     avatar: string;
     rating: number;
@@ -93,142 +95,38 @@ const HorizontalServiceCard = ({
     );
 };
 
-const categories = [
-    { name: "All", value: "All" },
-    { name: "Web Development", value: "Development" },
-    { name: "Graphic Design", value: "Designer" },
-    { name: "Digital Marketing", value: "Marketing" },
-    { name: "UI/UX Design", value: "UIUX Design" },
-    { name: "Copy writing", value: "Copy writing" },
-    { name: "SEO & Marketing", value: "SEO Marketing" }
-];
-
-const servicesData = [
-    {
-        id: 1,
-        name: 'Harry Thomas Wilson',
-        avatar:
-            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
-        rating: 4.4,
-        reviewCount: 57,
-        category: 'Development',
-        description:
-            'I will do website development as full stack web developer, front end, back-end development....',
-        price: 450,
-        coverImage:
-            'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1',
-    },
-    {
-        id: 2,
-        name: 'Olivia Grace Smith',
-        avatar:
-            'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
-        rating: 4.6,
-        reviewCount: 57,
-        category: 'Designer',
-        description: 'I will do website ui ux design, app ui ux design, ui ux design expert',
-        price: 320,
-        coverImage:
-            'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1',
-    },
-    {
-        id: 3,
-        name: 'Isla Charlotte Brown',
-        avatar:
-            'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
-        rating: 4.5,
-        reviewCount: 57,
-        category: 'Copy writing',
-        description: 'I will be your professional website content writer, SEO copywriter.',
-        price: 450,
-        coverImage:
-            'https://images.pexels.com/photos/6238297/pexels-photo-6238297.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1',
-    },
-    {
-        id: 4,
-        name: 'James William Davies',
-        avatar:
-            'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
-        rating: 4.8,
-        reviewCount: 24,
-        category: 'Marketing',
-        description: 'I will set up and manage your high-converting Google Ads and Meta Ads campaigns.',
-        price: 180,
-        coverImage:
-            'https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1',
-    },
-    {
-        id: 5,
-        name: 'Sophie Marie Evans',
-        avatar:
-            'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
-        rating: 4.9,
-        reviewCount: 42,
-        category: 'UIUX Design',
-        description: 'I will design mobile app UI/UX, SaaS landing page UI/UX in Figma.',
-        price: 290,
-        coverImage:
-            'https://images.pexels.com/photos/1966445/pexels-photo-1966445.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1',
-    },
-    {
-        id: 6,
-        name: 'Leo Alexander Taylor',
-        avatar:
-            'https://images.pexels.com/photos/912278/pexels-photo-912278.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
-        rating: 4.7,
-        reviewCount: 31,
-        category: 'SEO Marketing',
-        description: 'I will do advanced technical SEO audit, keyword research, and on-page optimization.',
-        price: 150,
-        coverImage:
-            'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1',
-    },
-    {
-        id: 7,
-        name: 'Isla Charlotte Brown',
-        avatar:
-            'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
-        rating: 4.4,
-        reviewCount: 57,
-        category: 'Copy writing',
-        description: 'I will be your professional website content writer, SEO copywriter.',
-        price: 450,
-        coverImage:
-            'https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1',
-    },
-    {
-        id: 8,
-        name: 'Olivia Grace Smith',
-        avatar:
-            'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
-        rating: 4.4,
-        reviewCount: 57,
-        category: 'Designer',
-        description: 'I will do website ui ux design, app ui ux design, ui ux design expert',
-        price: 320,
-        coverImage:
-            'https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1',
-    },
-    {
-        id: 9,
-        name: 'Harry Thomas Wilson',
-        avatar:
-            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
-        rating: 4.4,
-        reviewCount: 57,
-        category: 'Development',
-        description:
-            'I will do website development as full stack web developer, front end, back-end development....',
-        price: 450,
-        coverImage:
-            'https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1',
-    },
-];
-
-export default function ServicesList() {
+export default function ServiceList() {
     const searchParams = useSearchParams();
     const categoryQuery = searchParams.get('category');
     const [selectedCategory, setSelectedCategory] = useState('All');
+    
+    const [categories, setCategories] = useState<{name: string, value: string}[]>([{ name: "All", value: "All" }]);
+    const [servicesData, setServicesData] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Fetch categories
+                const catRes = await myFetch("/categories/active?type=service");
+                if (catRes?.data) {
+                    const mappedCats = catRes.data.map((c: any) => ({ name: c.name, value: c.name }));
+                    setCategories([{ name: "All", value: "All" }, ...mappedCats]);
+                }
+
+                // Fetch services
+                const srvRes = await myFetch("/services");
+                if (srvRes?.data) {
+                    setServicesData(srvRes.data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
 
     // Sync selected tab with URL query category param if present
     useEffect(() => {
@@ -241,7 +139,7 @@ export default function ServicesList() {
 
     const filteredServices = selectedCategory === 'All'
         ? servicesData
-        : servicesData.filter(service => service.category === selectedCategory);
+        : servicesData.filter(service => service.category?.name === selectedCategory);
 
     return (
         <section className="pb-16 md:py-20 bg-[#4f2c1d]">
@@ -282,14 +180,29 @@ export default function ServicesList() {
                     })}
                 </div>
 
-                {filteredServices.length === 0 ? (
+                {loading ? (
+                    <div className="py-20 text-center border border-dashed border-zinc-800 rounded-2xl bg-[#2a2a2a]/10 animate-in fade-in duration-300">
+                        <p className="text-[#FFDDA5] font-medium">Loading services...</p>
+                    </div>
+                ) : filteredServices.length === 0 ? (
                     <div key={selectedCategory} className="py-20 text-center border border-dashed border-zinc-800 rounded-2xl bg-[#2a2a2a]/10 animate-in fade-in duration-300">
                         <p className="text-zinc-500 text-sm">No services found in this category.</p>
                     </div>
                 ) : (
                     <div key={selectedCategory} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-3 duration-500">
                         {filteredServices.map((service) => (
-                            <HorizontalServiceCard key={service.id} {...service} />
+                            <HorizontalServiceCard 
+                                key={service._id} 
+                                id={service.slug || service._id}
+                                name={service.creator?.name || "Unknown"}
+                                avatar={resolveImageUrl(service.creator?.profileImage) || `https://ui-avatars.com/api/?name=${encodeURIComponent(service.creator?.name || 'User')}&background=random`}
+                                rating={service.ratingAverage || 0}
+                                reviewCount={service.ratingCount || 0}
+                                category={service.category?.name || "Service"}
+                                description={service.name || ""}
+                                price={service.price || 0}
+                                coverImage={resolveImageUrl(service.image) || "/placeholder.jpg"}
+                            />
                         ))}
                     </div>
                 )}

@@ -1,61 +1,77 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import CartItemRow from "./CartItemRow";
 import OrderSummary from "./OrderSummary";
+import { myFetch } from "../../../../helpers/myFetch";
+import { resolveImageUrl } from "../../../../helpers/resolveImageUrl";
 
 export interface CartItem {
-    id: string;
+    id: string; // cart item ID
+    productId: string; // actual product ID
     name: string;
     price: number;
     image: string;
     quantity: number;
 }
 
-export interface CartData {
-    items: CartItem[];
-    deliveryFee: number;
-}
-
-export const cartData: CartData = {
-    items: [
-        {
-            id: "1",
-            name: "Jr. Zoom Soccer Cleats",
-            price: 1169,
-            image: "/product4.png",
-            quantity: 1,
-        },
-        {
-            id: "2",
-            name: "Gucci duffle bag",
-            price: 420,
-            image: "/product2.png",
-            quantity: 1,
-        },
-    ],
-    deliveryFee: 55,
-};
-
 const ProductCart = () => {
-    const [items, setItems] = useState(cartData.items);
-    const { deliveryFee } = cartData;
+    const [items, setItems] = useState<CartItem[]>([]);
+    const [loading, setLoading] = useState(true);
+    // Assuming a static delivery fee for now unless provided by API
+    const deliveryFee = 55;
 
-    const handleRemove = (id: string) => {
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                const res = await myFetch('/carts/');
+                if (res?.data?.items) {
+                    const mappedItems = res.data.items.map((item: any) => ({
+                        id: item._id,
+                        productId: item.product?._id,
+                        name: item.product?.name || "Unknown Product",
+                        price: item.product?.discountPrice || item.product?.price || 0,
+                        image: resolveImageUrl(item.product?.images?.[0]) || "/placeholder.jpg",
+                        quantity: item.quantity || 1
+                    }));
+                    setItems(mappedItems);
+                }
+            } catch (error) {
+                console.error("Failed to fetch cart", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCart();
+    }, []);
+
+    const handleRemove = async (id: string) => {
+        // Optimistically remove from state
         setItems(items.filter((item) => item.id !== id));
+        // TODO: Add API call here if an endpoint to delete an item exists
+        // await myFetch(`/carts/items/${id}`, { method: 'DELETE' });
     };
 
-    const handleQuantityChange = (id: string, quantity: number) => {
+    const handleQuantityChange = async (id: string, quantity: number) => {
+        // Optimistically update state
         setItems(items.map((item) => (item.id === id ? { ...item, quantity } : item)));
+        // TODO: Add API call here if an endpoint to update quantity exists
     };
+
+    if (loading) {
+        return (
+            <main className="min-h-[calc(100vh-184px)] pt-14.5 flex items-center justify-center">
+                <p className="text-white">Loading cart...</p>
+            </main>
+        );
+    }
 
     const isEmpty = items.length === 0;
+
     return (
-        <main className="min-h-[calc(100vh-184px)]  pt-14.5 ">
-
-
+        <main className="min-h-[calc(100vh-184px)] pt-14.5 ">
             {isEmpty ? (
                 /* Empty State */
                 <div className="max-w-3xl mx-auto px-4">
@@ -93,7 +109,7 @@ const ProductCart = () => {
                                 />
                             ))}
                         </div>
- 
+
                         {/* Summary Section */}
                         <div className="lg:col-span-1">
                             <OrderSummary items={items} deliveryFee={deliveryFee} />

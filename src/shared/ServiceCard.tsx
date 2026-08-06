@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface service {
-    id: number,
+    id: string | number,
     name: string,
     avatar: string,
     rating: number,

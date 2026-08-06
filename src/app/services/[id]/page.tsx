@@ -1,11 +1,10 @@
 import ServiceDetails from "@/components/(service-pages)/service-details";
 
-const ServiceDetailsPage = () => {
+export default async function ServiceDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     return (
         <div>
-            <ServiceDetails />
+            <ServiceDetails slug={id} />
         </div>
     );
-};
-
-export default ServiceDetailsPage;
+}

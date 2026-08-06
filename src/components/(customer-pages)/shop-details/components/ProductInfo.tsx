@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Star, ShoppingCart, Zap, Truck, RotateCcw, Shield } from "lucide-react";
 import Link from "next/link";
+import { myFetch } from "../../../../../helpers/myFetch";
+import { toast } from "sonner";
 
 interface Highlight {
     label: string;
@@ -10,6 +12,7 @@ interface Highlight {
 }
 
 interface ProductInfoProps {
+    productId: string;
     name: string;
     price: number;
     originalPrice?: number;
@@ -27,6 +30,7 @@ const guarantees = [
 ];
 
 export default function ProductInfo({
+    productId,
     name,
     price,
     originalPrice,
@@ -37,9 +41,29 @@ export default function ProductInfo({
     highlights,
 }: ProductInfoProps) {
     const [qty, setQty] = useState(1);
+    const [addingToCart, setAddingToCart] = useState(false);
 
     const decrement = () => setQty((q) => Math.max(1, q - 1));
     const increment = () => setQty((q) => q + 1);
+
+    const handleAddToCart = async () => {
+        setAddingToCart(true);
+        try {
+            const res = await myFetch('/carts/', {
+                method: 'POST',
+                body: { product: productId, quantity: qty }
+            });
+            if (res?.success) {
+                toast.success("Added to cart successfully!");
+            } else {
+                toast.error(res?.message || "Failed to add to cart");
+            }
+        } catch (error) {
+            toast.error("An error occurred while adding to cart");
+        } finally {
+            setAddingToCart(false);
+        }
+    };
 
     const savings = originalPrice ? originalPrice - price : 0;
 
@@ -75,7 +99,7 @@ export default function ProductInfo({
                                 key={i}
                                 className={`w-4 h-4 ${i < Math.floor(rating)
                                     ? "fill-[#FFC107] text-[#FFC107]"
-                                    : "text-zinc-700 fill-zinc-700"
+                                    : "text-white/20 fill-white/20"
                                     }`}
                             />
                         ))}
@@ -109,9 +133,13 @@ export default function ProductInfo({
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-3">
-                        <button className="w-full sm:flex-1 flex items-center justify-center gap-2 bg-transparent hover:bg-primary border border-white/75  text-white font-semibold py-3.5 rounded-xl text-sm transition-all active:scale-95 cursor-pointer">
+                        <button 
+                            onClick={handleAddToCart}
+                            disabled={addingToCart}
+                            className="w-full sm:flex-1 flex items-center justify-center gap-2 bg-transparent hover:bg-primary border border-white/75  text-white font-semibold py-3.5 rounded-xl text-sm transition-all active:scale-95 cursor-pointer disabled:opacity-50"
+                        >
                             <ShoppingCart className="w-4 h-4" />
-                            Add to Cart
+                            {addingToCart ? "Adding..." : "Add to Cart"}
                         </button>
                         <Link
                             href="/check-out"
@@ -136,8 +164,7 @@ export default function ProductInfo({
                 </h3>
                 <ul className="space-y-2.5">
                     {aboutItems.map((item, idx) => (
-                        <li key={idx} className="flex gap-3 text-sm text-white/85 leading-relaxed font-light">
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#FF6700] shrink-0" />
+                        <li key={idx} className="text-sm text-white/85 leading-relaxed font-light">
                             {item}
                         </li>
                     ))}

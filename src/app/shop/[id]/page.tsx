@@ -1,5 +1,6 @@
 import ShopDetails from "@/components/(customer-pages)/shop-details";
 
-export default function ShopDetailsPage() {
-    return <ShopDetails />;
+export default async function ShopDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    return <ShopDetails slug={id} />;
 }

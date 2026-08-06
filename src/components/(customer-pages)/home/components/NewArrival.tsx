@@ -1,69 +1,49 @@
 "use client"
 
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { ArrowRight } from 'lucide-react';
 import ProductCard from '@/shared/ProductCard';
+import { myFetch } from '../../../../../helpers/myFetch';
+import { resolveImageUrl } from '../../../../../helpers/resolveImageUrl';
 
 // Import Swiper styles
 import 'swiper/css';
 import { useRouter } from 'next/navigation';
 
-const products = [
-    {
-        id: 1,
-        name: "Jr. Zoom Soccer Cleats",
-        image: "/product3.png",
-        currentPrice: 1169,
-        originalPrice: 1899,
-        discount: 35,
-        rating: 5,
-        reviews: 88
-    },
-    {
-        id: 2,
-        name: "Small BookSelf",
-        image: "/product4.png",
-        currentPrice: 520,
-        originalPrice: 580,
-        discount: 10,
-        rating: 5,
-        reviews: 88
-    },
-    {
-        id: 3,
-        name: "Gucci duffle bag",
-        image: "/product1.png",
-        currentPrice: 420,
-        originalPrice: 580,
-        discount: 24,
-        rating: 4.5,
-        reviews: 88
-    },
-    {
-        id: 4,
-        name: "RGB liquid CPU Cooler",
-        image: "/product2.png",
-        currentPrice: 120,
-        originalPrice: 180,
-        discount: 40,
-        rating: 5,
-        reviews: 88
-    },
-    {
-        id: 5,
-        name: "Mechanical Keyboard",
-        image: "/product1.png",
-        currentPrice: 150,
-        originalPrice: 200,
-        discount: 25,
-        rating: 5,
-        reviews: 120
-    }
-];
+export interface Product {
+    _id: string;
+    name: string;
+    images: string[];
+    price: number;
+    discountPrice?: number;
+    ratingAverage: number;
+    ratingCount: number;
+    slug: string;
+}
 
 const NewArrival = () => {
     const router = useRouter();
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const res = await myFetch("/products");
+                if (res?.data) {
+                    // Limit to 6 items
+                    setProducts(res.data.slice(0, 6));
+                }
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProducts();
+    }, []);
 
     const handleClick = () => {
         const cookies = document.cookie;
@@ -87,7 +67,7 @@ const NewArrival = () => {
                     </div>
                     <div className="flex justify-between items-end">
                         <h2 className="title mb-0!">Shop From New Arrival</h2>
-                        <button className="flex items-center gap-2  text-[#FFDDA5] px-6 py-3 rounded-md font-medium hover:underline underline-offset-4 transition-all group " onClick={handleClick}>
+                        <button className="flex items-center gap-2  text-[#FFDDA5] px-6 py-3 rounded-md font-medium hover:underline underline-offset-4 transition-all group cursor-pointer" onClick={handleClick}>
                             View All
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </button>
@@ -96,25 +76,40 @@ const NewArrival = () => {
 
                 {/* Slider */}
                 <div className="products-slider">
-                    <Swiper
-                        modules={[Autoplay]}
-                        spaceBetween={30}
-                        slidesPerView={4}
-                        autoplay={{ delay: 5000 }}
-                        breakpoints={{
-                            320: { slidesPerView: 1.2, spaceBetween: 20 },
-                            640: { slidesPerView: 2.2, spaceBetween: 20 },
-                            1024: { slidesPerView: 3, spaceBetween: 30 },
-                            1280: { slidesPerView: 4, spaceBetween: 30 }
-                        }}
-                        className="w-full"
-                    >
-                        {products.map((product) => (
-                            <SwiperSlide key={product.id}>
-                                <ProductCard product={product} />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                    {loading ? (
+                        <div className="flex justify-center items-center py-12 text-[#FFDDA5]">Loading...</div>
+                    ) : products.length > 0 ? (
+                        <Swiper
+                            modules={[Autoplay]}
+                            spaceBetween={30}
+                            slidesPerView={4}
+                            autoplay={{ delay: 5000 }}
+                            breakpoints={{
+                                320: { slidesPerView: 1.2, spaceBetween: 20 },
+                                640: { slidesPerView: 2.2, spaceBetween: 20 },
+                                1024: { slidesPerView: 3, spaceBetween: 30 },
+                                1280: { slidesPerView: 4, spaceBetween: 30 }
+                            }}
+                            className="w-full"
+                        >
+                            {products.map((product) => (
+                                <SwiperSlide key={product._id}>
+                                    <ProductCard product={{
+                                        id: product.slug || (product._id as any),
+                                        name: product.name,
+                                        image: resolveImageUrl(product.images?.[0]) || "/placeholder.jpg",
+                                        currentPrice: product.discountPrice || product.price,
+                                        originalPrice: product.price,
+                                        discount: product.discountPrice ? Math.round(((product.price - product.discountPrice) / product.price) * 100) : 0,
+                                        rating: product.ratingAverage || 0,
+                                        reviews: product.ratingCount || 0
+                                    }} />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    ) : (
+                        <div className="text-center text-white/50 py-10">No new arrivals found.</div>
+                    )}
                 </div>
             </div>
         </section>

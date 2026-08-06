@@ -1,93 +1,33 @@
 "use client"
+import { useState, useEffect } from "react";
 import ServiceCard from "@/shared/ServiceCard";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { myFetch } from "../../../../../helpers/myFetch";
+import { resolveImageUrl } from "../../../../../helpers/resolveImageUrl";
 
 
-const services = [
-    {
-        id: 1,
-        name: "Harry Thomas Wilson",
-        avatar:
-            "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1",
-        rating: 4.4,
-        reviewCount: 57,
-        category: "Development",
-        description:
-            "I will do website development as full stack web developer, front end, back-end development....",
-        price: 450,
-        coverImage:
-            "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1",
-    },
-    {
-        id: 2,
-        name: "Olivia Grace Smith",
-        avatar:
-            "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1",
-        rating: 4.4,
-        reviewCount: 57,
-        category: "Designer",
-        description: "I will do website ui ux design, app ui ux design, ui ux design expert",
-        price: 320,
-        coverImage:
-            "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1",
-    },
-    {
-        id: 3,
-        name: "Isla Charlotte Brown",
-        avatar:
-            "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1",
-        rating: 4.4,
-        reviewCount: 57,
-        category: "Copy writing",
-        description: "I will be your professional website content writer, SEO copywriter.",
-        price: 450,
-        coverImage:
-            "https://images.pexels.com/photos/6238297/pexels-photo-6238297.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1",
-    },
-    {
-        id: 4,
-        name: "Isla Charlotte Brown",
-        avatar:
-            "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1",
-        rating: 4.4,
-        reviewCount: 57,
-        category: "Copy writing",
-        description: "I will be your professional website content writer, SEO copywriter.",
-        price: 450,
-        coverImage:
-            "https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1",
-    },
-    {
-        id: 5,
-        name: "Olivia Grace Smith",
-        avatar:
-            "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1",
-        rating: 4.4,
-        reviewCount: 57,
-        category: "Designer",
-        description: "I will do website ui ux design, app ui ux design, ui ux design expert",
-        price: 320,
-        coverImage:
-            "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1",
-    },
-    {
-        id: 6,
-        name: "Harry Thomas Wilson",
-        avatar:
-            "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1",
-        rating: 4.4,
-        reviewCount: 57,
-        category: "Development",
-        description:
-            "I will do website development as full stack web developer, front end, back-end development....",
-        price: 450,
-        coverImage:
-            "https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg?auto=compress&cs=tinysrgb&w=400&h=220&dpr=1",
-    },
-];
 const Services = () => {
     const router = useRouter();
+    const [services, setServices] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const res = await myFetch('/services');
+                if (res?.data) {
+                    setServices(res.data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch services:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchServices();
+    }, []);
 
     const handleClick = () => {
         const cookies = document.cookie;
@@ -113,20 +53,36 @@ const Services = () => {
                             <h2 className="title mb-0!">Services</h2>
                         </div>
 
-                        <button className="flex items-center gap-2  text-[#FFDDA5] px-6 py-3 rounded-md font-medium hover:underline underline-offset-4 transition-all group " onClick={handleClick}>
+                        <button className="flex items-center gap-2  text-[#FFDDA5] px-6 py-3 rounded-md font-medium hover:underline underline-offset-4 transition-all group cursor-pointer" onClick={handleClick}>
                             View All
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </button>
                     </div>
                 </div>
 
-                {/* Slider */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {services.map((service) => (
-                        <ServiceCard key={service.id} {...service} />
-                    ))}
-                </div>
-
+                {/* Grid */}
+                {loading ? (
+                    <div className="flex justify-center items-center py-12 text-[#FFDDA5]">Loading...</div>
+                ) : services.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {services.map((service) => (
+                            <ServiceCard 
+                                key={service._id} 
+                                id={service.slug || service._id}
+                                name={service.creator?.name || "Unknown"}
+                                avatar={resolveImageUrl(service.creator?.profileImage) || `https://ui-avatars.com/api/?name=${encodeURIComponent(service.creator?.name || 'User')}&background=random`}
+                                rating={service.ratingAverage || 0}
+                                reviewCount={service.ratingCount || 0}
+                                category={service.category?.name || "Service"}
+                                description={service.name || ""}
+                                price={service.price || 0}
+                                coverImage={resolveImageUrl(service.image) || "/placeholder.jpg"}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center text-white/50 py-10">No services found.</div>
+                )}
             </div>
         </section>
     );
