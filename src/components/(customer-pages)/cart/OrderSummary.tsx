@@ -5,12 +5,11 @@ import { CartItem } from "../cart";
 
 interface OrderSummaryProps {
     items: CartItem[];
-    deliveryFee: number;
 }
 
-export default function OrderSummary({ items, deliveryFee }: OrderSummaryProps) {
+export default function OrderSummary({ items }: OrderSummaryProps) {
     const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const total = subtotal + deliveryFee;
+    const total = subtotal;
 
     return (
         <div className="h-fit sticky top-6 rounded-2xl bg-white border border-zinc-200/50 shadow-md">
@@ -51,12 +50,6 @@ export default function OrderSummary({ items, deliveryFee }: OrderSummaryProps) 
                     <span className="text-sm text-zinc-500">Subtotal Amount</span>
                     <span className="font-semibold text-zinc-800">
                         ${subtotal.toLocaleString()}
-                    </span>
-                </div>
-                <div className="flex justify-between items-center">
-                    <span className="text-sm text-zinc-500">Delivery Fee</span>
-                    <span className="font-semibold text-zinc-800">
-                        ${deliveryFee.toLocaleString()}
                     </span>
                 </div>
             </div>

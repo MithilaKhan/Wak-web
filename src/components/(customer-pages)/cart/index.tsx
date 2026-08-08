@@ -26,7 +26,7 @@ const ProductCart = () => {
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const res = await myFetch('/carts/');
+                const res = await myFetch('/carts/', { cache: 'no-store' });
                 if (res?.data?.items) {
                     const mappedItems = res.data.items.map((item: any) => ({
                         id: item._id,
@@ -112,7 +112,7 @@ const ProductCart = () => {
 
                         {/* Summary Section */}
                         <div className="lg:col-span-1">
-                            <OrderSummary items={items} deliveryFee={deliveryFee} />
+                            <OrderSummary items={items} />
                         </div>
                     </div>
                 </div>

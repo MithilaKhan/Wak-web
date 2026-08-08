@@ -14,7 +14,7 @@ export default function CartButton() {
         const fetchCart = async () => {
             try {
                 // Adjust fetch path according to your structure
-                const res = await myFetch('/carts/');
+                const res = await myFetch('/carts/', { cache: 'no-store' });
                 if (res?.data?.items) {
                     setCartCount(res.data.items.length);
                 }
